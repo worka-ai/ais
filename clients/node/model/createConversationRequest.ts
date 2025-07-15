@@ -16,17 +16,11 @@ import { RequestFile } from './models';
 * CreateConversation
 */
 export class CreateConversationRequest {
-    'defaultStrategyId'?: number;
     'tenantId': number;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "defaultStrategyId",
-            "baseName": "default_strategy_id",
-            "type": "number"
-        },
         {
             "name": "tenantId",
             "baseName": "tenant_id",
