@@ -15,18 +15,18 @@ import localVarRequest from 'request';
 import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { CreateAgentRequest } from '../model/createAgentRequest';
 import { CreateAgentResponse } from '../model/createAgentResponse';
-import { CreateConversationRequest } from '../model/createConversationRequest';
 import { CreateConversationResponse } from '../model/createConversationResponse';
+import { CreateConversationUnderTenantRequest } from '../model/createConversationUnderTenantRequest';
 import { CreateTenantRequest } from '../model/createTenantRequest';
 import { CreateTenantResponse } from '../model/createTenantResponse';
-import { CreateWorkflowRequest } from '../model/createWorkflowRequest';
 import { CreateWorkflowResponse } from '../model/createWorkflowResponse';
+import { CreateWorkflowUnderTenantRequest } from '../model/createWorkflowUnderTenantRequest';
 import { GetWorkflowResponse } from '../model/getWorkflowResponse';
-import { ToolUpsert } from '../model/toolUpsert';
-import { UpdateLLMConfigRequest } from '../model/updateLLMConfigRequest';
 import { UpdateLLMConfigResponse } from '../model/updateLLMConfigResponse';
+import { UpsertAgentRequest } from '../model/upsertAgentRequest';
+import { UpsertLLMConfigRequest } from '../model/upsertLLMConfigRequest';
+import { UpsertToolRequest } from '../model/upsertToolRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 
@@ -99,214 +99,10 @@ export class DefaultApi {
 
     /**
      * 
-     * @param createAgentRequest 
-     */
-    public async agentPut (createAgentRequest: CreateAgentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateAgentResponse;  }> {
-        const localVarPath = this.basePath + '/agent';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'createAgentRequest' is not null or undefined
-        if (createAgentRequest === null || createAgentRequest === undefined) {
-            throw new Error('Required parameter createAgentRequest was null or undefined when calling agentPut.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PUT',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(createAgentRequest, "CreateAgentRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: CreateAgentResponse;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "CreateAgentResponse");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @param createConversationRequest 
-     */
-    public async conversationPost (createConversationRequest: CreateConversationRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateConversationResponse;  }> {
-        const localVarPath = this.basePath + '/conversation';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'createConversationRequest' is not null or undefined
-        if (createConversationRequest === null || createConversationRequest === undefined) {
-            throw new Error('Required parameter createConversationRequest was null or undefined when calling conversationPost.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(createConversationRequest, "CreateConversationRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: CreateConversationResponse;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "CreateConversationResponse");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @param updateLLMConfigRequest 
-     */
-    public async llmConfigPost (updateLLMConfigRequest: UpdateLLMConfigRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UpdateLLMConfigResponse;  }> {
-        const localVarPath = this.basePath + '/llm_config';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'updateLLMConfigRequest' is not null or undefined
-        if (updateLLMConfigRequest === null || updateLLMConfigRequest === undefined) {
-            throw new Error('Required parameter updateLLMConfigRequest was null or undefined when calling llmConfigPost.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(updateLLMConfigRequest, "UpdateLLMConfigRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: UpdateLLMConfigResponse;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "UpdateLLMConfigResponse");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
      * @param createTenantRequest 
      */
-    public async tenantPost (createTenantRequest: CreateTenantRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateTenantResponse;  }> {
-        const localVarPath = this.basePath + '/tenant';
+    public async tenantsPost (createTenantRequest: CreateTenantRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateTenantResponse;  }> {
+        const localVarPath = this.basePath + '/tenants';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json'];
@@ -320,7 +116,7 @@ export class DefaultApi {
 
         // verify required parameter 'createTenantRequest' is not null or undefined
         if (createTenantRequest === null || createTenantRequest === undefined) {
-            throw new Error('Required parameter createTenantRequest was null or undefined when calling tenantPost.');
+            throw new Error('Required parameter createTenantRequest was null or undefined when calling tenantsPost.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -371,17 +167,31 @@ export class DefaultApi {
     }
     /**
      * 
-     * @param toolUpsert 
+     * @param tenantId 
+     * @param upsertAgentRequest 
      */
-    public async toolPut (toolUpsert: ToolUpsert, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/tool';
+    public async tenantsTenantIdAgentsPut (tenantId: number, upsertAgentRequest: UpsertAgentRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateAgentResponse;  }> {
+        const localVarPath = this.basePath + '/tenants/{tenant_id}/agents'
+            .replace('{' + 'tenant_id' + '}', encodeURIComponent(String(tenantId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'toolUpsert' is not null or undefined
-        if (toolUpsert === null || toolUpsert === undefined) {
-            throw new Error('Required parameter toolUpsert was null or undefined when calling toolPut.');
+        // verify required parameter 'tenantId' is not null or undefined
+        if (tenantId === null || tenantId === undefined) {
+            throw new Error('Required parameter tenantId was null or undefined when calling tenantsTenantIdAgentsPut.');
+        }
+
+        // verify required parameter 'upsertAgentRequest' is not null or undefined
+        if (upsertAgentRequest === null || upsertAgentRequest === undefined) {
+            throw new Error('Required parameter upsertAgentRequest was null or undefined when calling tenantsTenantIdAgentsPut.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -395,7 +205,225 @@ export class DefaultApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(toolUpsert, "ToolUpsert")
+            body: ObjectSerializer.serialize(upsertAgentRequest, "UpsertAgentRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: CreateAgentResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "CreateAgentResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @param tenantId 
+     * @param createConversationUnderTenantRequest 
+     */
+    public async tenantsTenantIdConversationsPost (tenantId: number, createConversationUnderTenantRequest: CreateConversationUnderTenantRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateConversationResponse;  }> {
+        const localVarPath = this.basePath + '/tenants/{tenant_id}/conversations'
+            .replace('{' + 'tenant_id' + '}', encodeURIComponent(String(tenantId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'tenantId' is not null or undefined
+        if (tenantId === null || tenantId === undefined) {
+            throw new Error('Required parameter tenantId was null or undefined when calling tenantsTenantIdConversationsPost.');
+        }
+
+        // verify required parameter 'createConversationUnderTenantRequest' is not null or undefined
+        if (createConversationUnderTenantRequest === null || createConversationUnderTenantRequest === undefined) {
+            throw new Error('Required parameter createConversationUnderTenantRequest was null or undefined when calling tenantsTenantIdConversationsPost.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createConversationUnderTenantRequest, "CreateConversationUnderTenantRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: CreateConversationResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "CreateConversationResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @param tenantId 
+     * @param upsertLLMConfigRequest 
+     */
+    public async tenantsTenantIdLlmConfigsPost (tenantId: number, upsertLLMConfigRequest: UpsertLLMConfigRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UpdateLLMConfigResponse;  }> {
+        const localVarPath = this.basePath + '/tenants/{tenant_id}/llm-configs'
+            .replace('{' + 'tenant_id' + '}', encodeURIComponent(String(tenantId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'tenantId' is not null or undefined
+        if (tenantId === null || tenantId === undefined) {
+            throw new Error('Required parameter tenantId was null or undefined when calling tenantsTenantIdLlmConfigsPost.');
+        }
+
+        // verify required parameter 'upsertLLMConfigRequest' is not null or undefined
+        if (upsertLLMConfigRequest === null || upsertLLMConfigRequest === undefined) {
+            throw new Error('Required parameter upsertLLMConfigRequest was null or undefined when calling tenantsTenantIdLlmConfigsPost.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(upsertLLMConfigRequest, "UpsertLLMConfigRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: UpdateLLMConfigResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "UpdateLLMConfigResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
+     * @param tenantId 
+     * @param upsertToolRequest 
+     */
+    public async tenantsTenantIdToolsPut (tenantId: number, upsertToolRequest: UpsertToolRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/tenants/{tenant_id}/tools'
+            .replace('{' + 'tenant_id' + '}', encodeURIComponent(String(tenantId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'tenantId' is not null or undefined
+        if (tenantId === null || tenantId === undefined) {
+            throw new Error('Required parameter tenantId was null or undefined when calling tenantsTenantIdToolsPut.');
+        }
+
+        // verify required parameter 'upsertToolRequest' is not null or undefined
+        if (upsertToolRequest === null || upsertToolRequest === undefined) {
+            throw new Error('Required parameter upsertToolRequest was null or undefined when calling tenantsTenantIdToolsPut.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'PUT',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(upsertToolRequest, "UpsertToolRequest")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -431,10 +459,85 @@ export class DefaultApi {
     }
     /**
      * 
+     * @param tenantId 
+     * @param createWorkflowUnderTenantRequest 
+     */
+    public async tenantsTenantIdWorkflowsPost (tenantId: number, createWorkflowUnderTenantRequest: CreateWorkflowUnderTenantRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateWorkflowResponse;  }> {
+        const localVarPath = this.basePath + '/tenants/{tenant_id}/workflows'
+            .replace('{' + 'tenant_id' + '}', encodeURIComponent(String(tenantId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'tenantId' is not null or undefined
+        if (tenantId === null || tenantId === undefined) {
+            throw new Error('Required parameter tenantId was null or undefined when calling tenantsTenantIdWorkflowsPost.');
+        }
+
+        // verify required parameter 'createWorkflowUnderTenantRequest' is not null or undefined
+        if (createWorkflowUnderTenantRequest === null || createWorkflowUnderTenantRequest === undefined) {
+            throw new Error('Required parameter createWorkflowUnderTenantRequest was null or undefined when calling tenantsTenantIdWorkflowsPost.');
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(createWorkflowUnderTenantRequest, "CreateWorkflowUnderTenantRequest")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: CreateWorkflowResponse;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "CreateWorkflowResponse");
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * 
      * @param id 
      */
-    public async workflowIdGet (id: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetWorkflowResponse;  }> {
-        const localVarPath = this.basePath + '/workflow/{id}'
+    public async workflowsIdGet (id: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: GetWorkflowResponse;  }> {
+        const localVarPath = this.basePath + '/workflows/{id}'
             .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -449,7 +552,7 @@ export class DefaultApi {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling workflowIdGet.');
+            throw new Error('Required parameter id was null or undefined when calling workflowsIdGet.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -488,74 +591,6 @@ export class DefaultApi {
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "GetWorkflowResponse");
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * 
-     * @param createWorkflowRequest 
-     */
-    public async workflowPost (createWorkflowRequest: CreateWorkflowRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CreateWorkflowResponse;  }> {
-        const localVarPath = this.basePath + '/workflow';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'createWorkflowRequest' is not null or undefined
-        if (createWorkflowRequest === null || createWorkflowRequest === undefined) {
-            throw new Error('Required parameter createWorkflowRequest was null or undefined when calling workflowPost.');
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(createWorkflowRequest, "CreateWorkflowRequest")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: CreateWorkflowResponse;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "CreateWorkflowResponse");
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));

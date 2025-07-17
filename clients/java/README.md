@@ -4,7 +4,7 @@
 
 - API version: 
 
-- Build date: 2025-07-15T22:06:20.793426+01:00[Europe/London]
+- Build date: 2025-07-17T16:24:59.041193+01:00[Europe/London]
 
 - Generator version: 7.14.0
 
@@ -95,12 +95,12 @@ public class DefaultApiExample {
         defaultClient.setBasePath("http://localhost");
         
         DefaultApi apiInstance = new DefaultApi(defaultClient);
-        CreateAgentRequest createAgentRequest = new CreateAgentRequest(); // CreateAgentRequest | 
+        CreateTenantRequest createTenantRequest = new CreateTenantRequest(); // CreateTenantRequest | 
         try {
-            CreateAgentResponse result = apiInstance.agentPut(createAgentRequest);
+            CreateTenantResponse result = apiInstance.tenantsPost(createTenantRequest);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#agentPut");
+            System.err.println("Exception when calling DefaultApi#tenantsPost");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
@@ -117,36 +117,36 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**agentPut**](docs/DefaultApi.md#agentPut) | **PUT** /agent | 
-*DefaultApi* | [**conversationPost**](docs/DefaultApi.md#conversationPost) | **POST** /conversation | 
-*DefaultApi* | [**llmConfigPost**](docs/DefaultApi.md#llmConfigPost) | **POST** /llm_config | 
-*DefaultApi* | [**tenantPost**](docs/DefaultApi.md#tenantPost) | **POST** /tenant | 
-*DefaultApi* | [**toolPut**](docs/DefaultApi.md#toolPut) | **PUT** /tool | 
-*DefaultApi* | [**workflowIdGet**](docs/DefaultApi.md#workflowIdGet) | **GET** /workflow/{id} | 
-*DefaultApi* | [**workflowPost**](docs/DefaultApi.md#workflowPost) | **POST** /workflow | 
+*DefaultApi* | [**tenantsPost**](docs/DefaultApi.md#tenantsPost) | **POST** /tenants | 
+*DefaultApi* | [**tenantsTenantIdAgentsPut**](docs/DefaultApi.md#tenantsTenantIdAgentsPut) | **PUT** /tenants/{tenant_id}/agents | 
+*DefaultApi* | [**tenantsTenantIdConversationsPost**](docs/DefaultApi.md#tenantsTenantIdConversationsPost) | **POST** /tenants/{tenant_id}/conversations | 
+*DefaultApi* | [**tenantsTenantIdLlmConfigsPost**](docs/DefaultApi.md#tenantsTenantIdLlmConfigsPost) | **POST** /tenants/{tenant_id}/llm-configs | 
+*DefaultApi* | [**tenantsTenantIdToolsPut**](docs/DefaultApi.md#tenantsTenantIdToolsPut) | **PUT** /tenants/{tenant_id}/tools | 
+*DefaultApi* | [**tenantsTenantIdWorkflowsPost**](docs/DefaultApi.md#tenantsTenantIdWorkflowsPost) | **POST** /tenants/{tenant_id}/workflows | 
+*DefaultApi* | [**workflowsIdGet**](docs/DefaultApi.md#workflowsIdGet) | **GET** /workflows/{id} | 
 
 
 ## Documentation for Models
 
- - [CreateAgentRequest](docs/CreateAgentRequest.md)
- - [CreateAgentRequestAgentsInner](docs/CreateAgentRequestAgentsInner.md)
- - [CreateAgentRequestAgentsInnerEdgesInner](docs/CreateAgentRequestAgentsInnerEdgesInner.md)
- - [CreateAgentRequestAgentsInnerRulesInner](docs/CreateAgentRequestAgentsInnerRulesInner.md)
- - [CreateAgentRequestAgentsInnerRulesInnerToolsInner](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInner.md)
- - [CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.md)
- - [CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal.md)
  - [CreateAgentResponse](docs/CreateAgentResponse.md)
- - [CreateConversationRequest](docs/CreateConversationRequest.md)
  - [CreateConversationResponse](docs/CreateConversationResponse.md)
+ - [CreateConversationUnderTenantRequest](docs/CreateConversationUnderTenantRequest.md)
  - [CreateTenantRequest](docs/CreateTenantRequest.md)
  - [CreateTenantResponse](docs/CreateTenantResponse.md)
- - [CreateWorkflowRequest](docs/CreateWorkflowRequest.md)
- - [CreateWorkflowRequestGenerationConfig](docs/CreateWorkflowRequestGenerationConfig.md)
  - [CreateWorkflowResponse](docs/CreateWorkflowResponse.md)
+ - [CreateWorkflowUnderTenantRequest](docs/CreateWorkflowUnderTenantRequest.md)
+ - [CreateWorkflowUnderTenantRequestGenerationConfig](docs/CreateWorkflowUnderTenantRequestGenerationConfig.md)
  - [GetWorkflowResponse](docs/GetWorkflowResponse.md)
- - [ToolUpsert](docs/ToolUpsert.md)
- - [UpdateLLMConfigRequest](docs/UpdateLLMConfigRequest.md)
  - [UpdateLLMConfigResponse](docs/UpdateLLMConfigResponse.md)
+ - [UpsertAgentRequest](docs/UpsertAgentRequest.md)
+ - [UpsertAgentRequestAgentsInner](docs/UpsertAgentRequestAgentsInner.md)
+ - [UpsertAgentRequestAgentsInnerEdgesInner](docs/UpsertAgentRequestAgentsInnerEdgesInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInner](docs/UpsertAgentRequestAgentsInnerRulesInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInnerToolsInner](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal.md)
+ - [UpsertLLMConfigRequest](docs/UpsertLLMConfigRequest.md)
+ - [UpsertToolRequest](docs/UpsertToolRequest.md)
 
 
 <a id="documentation-for-authorization"></a>

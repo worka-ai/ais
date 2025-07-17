@@ -1,24 +1,24 @@
 import localVarRequest from 'request';
 
-export * from './createAgentRequest';
-export * from './createAgentRequestAgentsInner';
-export * from './createAgentRequestAgentsInnerEdgesInner';
-export * from './createAgentRequestAgentsInnerRulesInner';
-export * from './createAgentRequestAgentsInnerRulesInnerToolsInner';
-export * from './createAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner';
-export * from './createAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal';
 export * from './createAgentResponse';
-export * from './createConversationRequest';
 export * from './createConversationResponse';
+export * from './createConversationUnderTenantRequest';
 export * from './createTenantRequest';
 export * from './createTenantResponse';
-export * from './createWorkflowRequest';
-export * from './createWorkflowRequestGenerationConfig';
 export * from './createWorkflowResponse';
+export * from './createWorkflowUnderTenantRequest';
+export * from './createWorkflowUnderTenantRequestGenerationConfig';
 export * from './getWorkflowResponse';
-export * from './toolUpsert';
-export * from './updateLLMConfigRequest';
 export * from './updateLLMConfigResponse';
+export * from './upsertAgentRequest';
+export * from './upsertAgentRequestAgentsInner';
+export * from './upsertAgentRequestAgentsInnerEdgesInner';
+export * from './upsertAgentRequestAgentsInnerRulesInner';
+export * from './upsertAgentRequestAgentsInnerRulesInnerToolsInner';
+export * from './upsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner';
+export * from './upsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal';
+export * from './upsertLLMConfigRequest';
+export * from './upsertToolRequest';
 
 import * as fs from 'fs';
 
@@ -33,25 +33,25 @@ export interface RequestDetailedFile {
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
-import { CreateAgentRequest } from './createAgentRequest';
-import { CreateAgentRequestAgentsInner } from './createAgentRequestAgentsInner';
-import { CreateAgentRequestAgentsInnerEdgesInner } from './createAgentRequestAgentsInnerEdgesInner';
-import { CreateAgentRequestAgentsInnerRulesInner } from './createAgentRequestAgentsInnerRulesInner';
-import { CreateAgentRequestAgentsInnerRulesInnerToolsInner } from './createAgentRequestAgentsInnerRulesInnerToolsInner';
-import { CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner } from './createAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner';
-import { CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal } from './createAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal';
 import { CreateAgentResponse } from './createAgentResponse';
-import { CreateConversationRequest } from './createConversationRequest';
 import { CreateConversationResponse } from './createConversationResponse';
+import { CreateConversationUnderTenantRequest } from './createConversationUnderTenantRequest';
 import { CreateTenantRequest } from './createTenantRequest';
 import { CreateTenantResponse } from './createTenantResponse';
-import { CreateWorkflowRequest } from './createWorkflowRequest';
-import { CreateWorkflowRequestGenerationConfig } from './createWorkflowRequestGenerationConfig';
 import { CreateWorkflowResponse } from './createWorkflowResponse';
+import { CreateWorkflowUnderTenantRequest } from './createWorkflowUnderTenantRequest';
+import { CreateWorkflowUnderTenantRequestGenerationConfig } from './createWorkflowUnderTenantRequestGenerationConfig';
 import { GetWorkflowResponse } from './getWorkflowResponse';
-import { ToolUpsert } from './toolUpsert';
-import { UpdateLLMConfigRequest } from './updateLLMConfigRequest';
 import { UpdateLLMConfigResponse } from './updateLLMConfigResponse';
+import { UpsertAgentRequest } from './upsertAgentRequest';
+import { UpsertAgentRequestAgentsInner } from './upsertAgentRequestAgentsInner';
+import { UpsertAgentRequestAgentsInnerEdgesInner } from './upsertAgentRequestAgentsInnerEdgesInner';
+import { UpsertAgentRequestAgentsInnerRulesInner } from './upsertAgentRequestAgentsInnerRulesInner';
+import { UpsertAgentRequestAgentsInnerRulesInnerToolsInner } from './upsertAgentRequestAgentsInnerRulesInnerToolsInner';
+import { UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner } from './upsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner';
+import { UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal } from './upsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal';
+import { UpsertLLMConfigRequest } from './upsertLLMConfigRequest';
+import { UpsertToolRequest } from './upsertToolRequest';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -69,25 +69,25 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
-    "CreateAgentRequest": CreateAgentRequest,
-    "CreateAgentRequestAgentsInner": CreateAgentRequestAgentsInner,
-    "CreateAgentRequestAgentsInnerEdgesInner": CreateAgentRequestAgentsInnerEdgesInner,
-    "CreateAgentRequestAgentsInnerRulesInner": CreateAgentRequestAgentsInnerRulesInner,
-    "CreateAgentRequestAgentsInnerRulesInnerToolsInner": CreateAgentRequestAgentsInnerRulesInnerToolsInner,
-    "CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner": CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner,
-    "CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal": CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal,
     "CreateAgentResponse": CreateAgentResponse,
-    "CreateConversationRequest": CreateConversationRequest,
     "CreateConversationResponse": CreateConversationResponse,
+    "CreateConversationUnderTenantRequest": CreateConversationUnderTenantRequest,
     "CreateTenantRequest": CreateTenantRequest,
     "CreateTenantResponse": CreateTenantResponse,
-    "CreateWorkflowRequest": CreateWorkflowRequest,
-    "CreateWorkflowRequestGenerationConfig": CreateWorkflowRequestGenerationConfig,
     "CreateWorkflowResponse": CreateWorkflowResponse,
+    "CreateWorkflowUnderTenantRequest": CreateWorkflowUnderTenantRequest,
+    "CreateWorkflowUnderTenantRequestGenerationConfig": CreateWorkflowUnderTenantRequestGenerationConfig,
     "GetWorkflowResponse": GetWorkflowResponse,
-    "ToolUpsert": ToolUpsert,
-    "UpdateLLMConfigRequest": UpdateLLMConfigRequest,
     "UpdateLLMConfigResponse": UpdateLLMConfigResponse,
+    "UpsertAgentRequest": UpsertAgentRequest,
+    "UpsertAgentRequestAgentsInner": UpsertAgentRequestAgentsInner,
+    "UpsertAgentRequestAgentsInnerEdgesInner": UpsertAgentRequestAgentsInnerEdgesInner,
+    "UpsertAgentRequestAgentsInnerRulesInner": UpsertAgentRequestAgentsInnerRulesInner,
+    "UpsertAgentRequestAgentsInnerRulesInnerToolsInner": UpsertAgentRequestAgentsInnerRulesInnerToolsInner,
+    "UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner": UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner,
+    "UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal": UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal,
+    "UpsertLLMConfigRequest": UpsertLLMConfigRequest,
+    "UpsertToolRequest": UpsertToolRequest,
 }
 
 // Check if a string starts with another string without using es6 features

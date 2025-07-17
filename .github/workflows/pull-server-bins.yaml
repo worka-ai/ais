@@ -1,0 +1,73 @@
+name: Sync Server Binaries
+
+# Manually trigger or schedule as needed
+on:
+  workflow_dispatch:
+
+jobs:
+  sync-server-bins:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # To create/update releases in this public repo
+
+    steps:
+      - name: Checkout public repo
+        uses: actions/checkout@v3
+
+      - name: Get latest release tag from private repo
+        id: get_private_release
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          script: |
+            const release = await github.rest.repos.getLatestRelease({
+              owner: 'worka-ai', 
+              repo: 'worka'
+            });
+            core.setOutput('tag', release.data.tag_name);
+            core.setOutput('assets', JSON.stringify(release.data.assets));
+
+      - name: Download private release assets
+        env:
+          PRIVATE_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+        run: |
+          TAG=${{ steps.get_private_release.outputs.tag }}
+          ASSETS_JSON='${{ steps.get_private_release.outputs.assets }}'
+          mkdir -p server-bins
+          echo "$ASSETS_JSON" | jq -r '.[] | @base64' | while read asset; do
+            _jq() { echo "$asset" | base64 --decode | jq -r "$1"; }
+            ASSET_ID=$(_jq '.id')
+            ASSET_NAME=$(_jq '.name')
+            echo "Downloading $ASSET_NAME from private repo..."
+            curl -L -H "Authorization: token $PRIVATE_TOKEN" \
+                 -H "Accept: application/octet-stream" \
+                 "https://api.github.com/repos/private-owner/private-repo/releases/assets/$ASSET_ID" \
+                 -o "server-bins/$ASSET_NAME"
+          done
+
+      - name: Create or update public release
+        id: create_public_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.get_private_release.outputs.tag }}
+          release_name: ${{ steps.get_private_release.outputs.tag }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload binaries to public release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          UPLOAD_URL="${{ steps.create_public_release.outputs.upload_url }}"
+          for filepath in server-bins/*; do
+            filename=$(basename "$filepath")
+            echo "Uploading $filename..."
+            curl --fail -X POST \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"$filepath" \
+              "${UPLOAD_URL}?name=${filename}"
+          done

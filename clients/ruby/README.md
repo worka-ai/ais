@@ -58,13 +58,13 @@ Please follow the [installation](#installation) procedure and then run the follo
 require 'worka'
 
 api_instance = Worka::DefaultApi.new
-create_agent_request = Worka::CreateAgentRequest.new({agents: [Worka::CreateAgentRequestAgentsInner.new({created_at: Time.now, description: 'description_example', edges: [Worka::CreateAgentRequestAgentsInnerEdgesInner.new({conditions: [3.56], priority: 37, target_agent_id: 3.56})], expected_input: 'expected_input_example', id: 3.56, name: 'name_example', rules: [Worka::CreateAgentRequestAgentsInnerRulesInner.new({content: 'content_example', description: 'description_example', id: 3.56, name: 'name_example', position: 3.56, rule_created_at: Time.now, tenant_id: 3.56, version_created_at: Time.now, version_id: 3.56})], tenant_id: 3.56, tools: [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInner.new({function_declarations: [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.new({description: 'description_example', name: 'name_example', parameters: 3.56})]})]})]}) # CreateAgentRequest | 
+create_tenant_request = Worka::CreateTenantRequest.new({determine_conversation_with_agent: 3.56, determine_conversation_with_narrative: 'determine_conversation_with_narrative_example', tenant_id: 3.56, username: 'username_example'}) # CreateTenantRequest | 
 
 begin
-  result = api_instance.agent_put(create_agent_request)
+  result = api_instance.tenants_post(create_tenant_request)
   p result
 rescue Worka::ApiError => e
-  puts "Exception when calling DefaultApi->agent_put: #{e}"
+  puts "Exception when calling DefaultApi->tenants_post: #{e}"
 end
 
 ```
@@ -75,36 +75,36 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*Worka::DefaultApi* | [**agent_put**](docs/DefaultApi.md#agent_put) | **PUT** /agent | 
-*Worka::DefaultApi* | [**conversation_post**](docs/DefaultApi.md#conversation_post) | **POST** /conversation | 
-*Worka::DefaultApi* | [**llm_config_post**](docs/DefaultApi.md#llm_config_post) | **POST** /llm_config | 
-*Worka::DefaultApi* | [**tenant_post**](docs/DefaultApi.md#tenant_post) | **POST** /tenant | 
-*Worka::DefaultApi* | [**tool_put**](docs/DefaultApi.md#tool_put) | **PUT** /tool | 
-*Worka::DefaultApi* | [**workflow_id_get**](docs/DefaultApi.md#workflow_id_get) | **GET** /workflow/{id} | 
-*Worka::DefaultApi* | [**workflow_post**](docs/DefaultApi.md#workflow_post) | **POST** /workflow | 
+*Worka::DefaultApi* | [**tenants_post**](docs/DefaultApi.md#tenants_post) | **POST** /tenants | 
+*Worka::DefaultApi* | [**tenants_tenant_id_agents_put**](docs/DefaultApi.md#tenants_tenant_id_agents_put) | **PUT** /tenants/{tenant_id}/agents | 
+*Worka::DefaultApi* | [**tenants_tenant_id_conversations_post**](docs/DefaultApi.md#tenants_tenant_id_conversations_post) | **POST** /tenants/{tenant_id}/conversations | 
+*Worka::DefaultApi* | [**tenants_tenant_id_llm_configs_post**](docs/DefaultApi.md#tenants_tenant_id_llm_configs_post) | **POST** /tenants/{tenant_id}/llm-configs | 
+*Worka::DefaultApi* | [**tenants_tenant_id_tools_put**](docs/DefaultApi.md#tenants_tenant_id_tools_put) | **PUT** /tenants/{tenant_id}/tools | 
+*Worka::DefaultApi* | [**tenants_tenant_id_workflows_post**](docs/DefaultApi.md#tenants_tenant_id_workflows_post) | **POST** /tenants/{tenant_id}/workflows | 
+*Worka::DefaultApi* | [**workflows_id_get**](docs/DefaultApi.md#workflows_id_get) | **GET** /workflows/{id} | 
 
 
 ## Documentation for Models
 
- - [Worka::CreateAgentRequest](docs/CreateAgentRequest.md)
- - [Worka::CreateAgentRequestAgentsInner](docs/CreateAgentRequestAgentsInner.md)
- - [Worka::CreateAgentRequestAgentsInnerEdgesInner](docs/CreateAgentRequestAgentsInnerEdgesInner.md)
- - [Worka::CreateAgentRequestAgentsInnerRulesInner](docs/CreateAgentRequestAgentsInnerRulesInner.md)
- - [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInner](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInner.md)
- - [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.md)
- - [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal.md)
  - [Worka::CreateAgentResponse](docs/CreateAgentResponse.md)
- - [Worka::CreateConversationRequest](docs/CreateConversationRequest.md)
  - [Worka::CreateConversationResponse](docs/CreateConversationResponse.md)
+ - [Worka::CreateConversationUnderTenantRequest](docs/CreateConversationUnderTenantRequest.md)
  - [Worka::CreateTenantRequest](docs/CreateTenantRequest.md)
  - [Worka::CreateTenantResponse](docs/CreateTenantResponse.md)
- - [Worka::CreateWorkflowRequest](docs/CreateWorkflowRequest.md)
- - [Worka::CreateWorkflowRequestGenerationConfig](docs/CreateWorkflowRequestGenerationConfig.md)
  - [Worka::CreateWorkflowResponse](docs/CreateWorkflowResponse.md)
+ - [Worka::CreateWorkflowUnderTenantRequest](docs/CreateWorkflowUnderTenantRequest.md)
+ - [Worka::CreateWorkflowUnderTenantRequestGenerationConfig](docs/CreateWorkflowUnderTenantRequestGenerationConfig.md)
  - [Worka::GetWorkflowResponse](docs/GetWorkflowResponse.md)
- - [Worka::ToolUpsert](docs/ToolUpsert.md)
- - [Worka::UpdateLLMConfigRequest](docs/UpdateLLMConfigRequest.md)
  - [Worka::UpdateLLMConfigResponse](docs/UpdateLLMConfigResponse.md)
+ - [Worka::UpsertAgentRequest](docs/UpsertAgentRequest.md)
+ - [Worka::UpsertAgentRequestAgentsInner](docs/UpsertAgentRequestAgentsInner.md)
+ - [Worka::UpsertAgentRequestAgentsInnerEdgesInner](docs/UpsertAgentRequestAgentsInnerEdgesInner.md)
+ - [Worka::UpsertAgentRequestAgentsInnerRulesInner](docs/UpsertAgentRequestAgentsInnerRulesInner.md)
+ - [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInner](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md)
+ - [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.md)
+ - [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal.md)
+ - [Worka::UpsertLLMConfigRequest](docs/UpsertLLMConfigRequest.md)
+ - [Worka::UpsertToolRequest](docs/UpsertToolRequest.md)
 
 
 ## Documentation for Authorization

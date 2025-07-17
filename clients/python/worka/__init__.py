@@ -28,25 +28,25 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
-    "CreateAgentRequest",
-    "CreateAgentRequestAgentsInner",
-    "CreateAgentRequestAgentsInnerEdgesInner",
-    "CreateAgentRequestAgentsInnerRulesInner",
-    "CreateAgentRequestAgentsInnerRulesInnerToolsInner",
-    "CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner",
-    "CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal",
     "CreateAgentResponse",
-    "CreateConversationRequest",
     "CreateConversationResponse",
+    "CreateConversationUnderTenantRequest",
     "CreateTenantRequest",
     "CreateTenantResponse",
-    "CreateWorkflowRequest",
-    "CreateWorkflowRequestGenerationConfig",
     "CreateWorkflowResponse",
+    "CreateWorkflowUnderTenantRequest",
+    "CreateWorkflowUnderTenantRequestGenerationConfig",
     "GetWorkflowResponse",
-    "ToolUpsert",
-    "UpdateLLMConfigRequest",
     "UpdateLLMConfigResponse",
+    "UpsertAgentRequest",
+    "UpsertAgentRequestAgentsInner",
+    "UpsertAgentRequestAgentsInnerEdgesInner",
+    "UpsertAgentRequestAgentsInnerRulesInner",
+    "UpsertAgentRequestAgentsInnerRulesInnerToolsInner",
+    "UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner",
+    "UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal",
+    "UpsertLLMConfigRequest",
+    "UpsertToolRequest",
 ]
 
 # import apis into sdk package
@@ -64,22 +64,22 @@ from worka.exceptions import ApiAttributeError as ApiAttributeError
 from worka.exceptions import ApiException as ApiException
 
 # import models into sdk package
-from worka.models.create_agent_request import CreateAgentRequest as CreateAgentRequest
-from worka.models.create_agent_request_agents_inner import CreateAgentRequestAgentsInner as CreateAgentRequestAgentsInner
-from worka.models.create_agent_request_agents_inner_edges_inner import CreateAgentRequestAgentsInnerEdgesInner as CreateAgentRequestAgentsInnerEdgesInner
-from worka.models.create_agent_request_agents_inner_rules_inner import CreateAgentRequestAgentsInnerRulesInner as CreateAgentRequestAgentsInnerRulesInner
-from worka.models.create_agent_request_agents_inner_rules_inner_tools_inner import CreateAgentRequestAgentsInnerRulesInnerToolsInner as CreateAgentRequestAgentsInnerRulesInnerToolsInner
-from worka.models.create_agent_request_agents_inner_rules_inner_tools_inner_function_declarations_inner import CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner as CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner
-from worka.models.create_agent_request_agents_inner_rules_inner_tools_inner_function_declarations_inner_internal import CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal as CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal
 from worka.models.create_agent_response import CreateAgentResponse as CreateAgentResponse
-from worka.models.create_conversation_request import CreateConversationRequest as CreateConversationRequest
 from worka.models.create_conversation_response import CreateConversationResponse as CreateConversationResponse
+from worka.models.create_conversation_under_tenant_request import CreateConversationUnderTenantRequest as CreateConversationUnderTenantRequest
 from worka.models.create_tenant_request import CreateTenantRequest as CreateTenantRequest
 from worka.models.create_tenant_response import CreateTenantResponse as CreateTenantResponse
-from worka.models.create_workflow_request import CreateWorkflowRequest as CreateWorkflowRequest
-from worka.models.create_workflow_request_generation_config import CreateWorkflowRequestGenerationConfig as CreateWorkflowRequestGenerationConfig
 from worka.models.create_workflow_response import CreateWorkflowResponse as CreateWorkflowResponse
+from worka.models.create_workflow_under_tenant_request import CreateWorkflowUnderTenantRequest as CreateWorkflowUnderTenantRequest
+from worka.models.create_workflow_under_tenant_request_generation_config import CreateWorkflowUnderTenantRequestGenerationConfig as CreateWorkflowUnderTenantRequestGenerationConfig
 from worka.models.get_workflow_response import GetWorkflowResponse as GetWorkflowResponse
-from worka.models.tool_upsert import ToolUpsert as ToolUpsert
-from worka.models.update_llm_config_request import UpdateLLMConfigRequest as UpdateLLMConfigRequest
 from worka.models.update_llm_config_response import UpdateLLMConfigResponse as UpdateLLMConfigResponse
+from worka.models.upsert_agent_request import UpsertAgentRequest as UpsertAgentRequest
+from worka.models.upsert_agent_request_agents_inner import UpsertAgentRequestAgentsInner as UpsertAgentRequestAgentsInner
+from worka.models.upsert_agent_request_agents_inner_edges_inner import UpsertAgentRequestAgentsInnerEdgesInner as UpsertAgentRequestAgentsInnerEdgesInner
+from worka.models.upsert_agent_request_agents_inner_rules_inner import UpsertAgentRequestAgentsInnerRulesInner as UpsertAgentRequestAgentsInnerRulesInner
+from worka.models.upsert_agent_request_agents_inner_rules_inner_tools_inner import UpsertAgentRequestAgentsInnerRulesInnerToolsInner as UpsertAgentRequestAgentsInnerRulesInnerToolsInner
+from worka.models.upsert_agent_request_agents_inner_rules_inner_tools_inner_function_declarations_inner import UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner as UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner
+from worka.models.upsert_agent_request_agents_inner_rules_inner_tools_inner_function_declarations_inner_internal import UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal as UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal
+from worka.models.upsert_llm_config_request import UpsertLLMConfigRequest as UpsertLLMConfigRequest
+from worka.models.upsert_tool_request import UpsertToolRequest as UpsertToolRequest

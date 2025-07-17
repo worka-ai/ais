@@ -4,204 +4,18 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**agent_put**](DefaultApi.md#agent_put) | **PUT** /agent |  |
-| [**conversation_post**](DefaultApi.md#conversation_post) | **POST** /conversation |  |
-| [**llm_config_post**](DefaultApi.md#llm_config_post) | **POST** /llm_config |  |
-| [**tenant_post**](DefaultApi.md#tenant_post) | **POST** /tenant |  |
-| [**tool_put**](DefaultApi.md#tool_put) | **PUT** /tool |  |
-| [**workflow_id_get**](DefaultApi.md#workflow_id_get) | **GET** /workflow/{id} |  |
-| [**workflow_post**](DefaultApi.md#workflow_post) | **POST** /workflow |  |
+| [**tenants_post**](DefaultApi.md#tenants_post) | **POST** /tenants |  |
+| [**tenants_tenant_id_agents_put**](DefaultApi.md#tenants_tenant_id_agents_put) | **PUT** /tenants/{tenant_id}/agents |  |
+| [**tenants_tenant_id_conversations_post**](DefaultApi.md#tenants_tenant_id_conversations_post) | **POST** /tenants/{tenant_id}/conversations |  |
+| [**tenants_tenant_id_llm_configs_post**](DefaultApi.md#tenants_tenant_id_llm_configs_post) | **POST** /tenants/{tenant_id}/llm-configs |  |
+| [**tenants_tenant_id_tools_put**](DefaultApi.md#tenants_tenant_id_tools_put) | **PUT** /tenants/{tenant_id}/tools |  |
+| [**tenants_tenant_id_workflows_post**](DefaultApi.md#tenants_tenant_id_workflows_post) | **POST** /tenants/{tenant_id}/workflows |  |
+| [**workflows_id_get**](DefaultApi.md#workflows_id_get) | **GET** /workflows/{id} |  |
 
 
-## agent_put
+## tenants_post
 
-> <CreateAgentResponse> agent_put(create_agent_request)
-
-
-
-### Examples
-
-```ruby
-require 'time'
-require 'worka'
-
-api_instance = Worka::DefaultApi.new
-create_agent_request = Worka::CreateAgentRequest.new({agents: [Worka::CreateAgentRequestAgentsInner.new({created_at: Time.now, description: 'description_example', edges: [Worka::CreateAgentRequestAgentsInnerEdgesInner.new({conditions: [3.56], priority: 37, target_agent_id: 3.56})], expected_input: 'expected_input_example', id: 3.56, name: 'name_example', rules: [Worka::CreateAgentRequestAgentsInnerRulesInner.new({content: 'content_example', description: 'description_example', id: 3.56, name: 'name_example', position: 3.56, rule_created_at: Time.now, tenant_id: 3.56, version_created_at: Time.now, version_id: 3.56})], tenant_id: 3.56, tools: [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInner.new({function_declarations: [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.new({description: 'description_example', name: 'name_example', parameters: 3.56})]})]})]}) # CreateAgentRequest | 
-
-begin
-  
-  result = api_instance.agent_put(create_agent_request)
-  p result
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->agent_put: #{e}"
-end
-```
-
-#### Using the agent_put_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<CreateAgentResponse>, Integer, Hash)> agent_put_with_http_info(create_agent_request)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.agent_put_with_http_info(create_agent_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <CreateAgentResponse>
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->agent_put_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **create_agent_request** | [**CreateAgentRequest**](CreateAgentRequest.md) |  |  |
-
-### Return type
-
-[**CreateAgentResponse**](CreateAgentResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## conversation_post
-
-> <CreateConversationResponse> conversation_post(create_conversation_request)
-
-
-
-### Examples
-
-```ruby
-require 'time'
-require 'worka'
-
-api_instance = Worka::DefaultApi.new
-create_conversation_request = Worka::CreateConversationRequest.new({tenant_id: 3.56}) # CreateConversationRequest | 
-
-begin
-  
-  result = api_instance.conversation_post(create_conversation_request)
-  p result
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->conversation_post: #{e}"
-end
-```
-
-#### Using the conversation_post_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<CreateConversationResponse>, Integer, Hash)> conversation_post_with_http_info(create_conversation_request)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.conversation_post_with_http_info(create_conversation_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <CreateConversationResponse>
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->conversation_post_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **create_conversation_request** | [**CreateConversationRequest**](CreateConversationRequest.md) |  |  |
-
-### Return type
-
-[**CreateConversationResponse**](CreateConversationResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## llm_config_post
-
-> <UpdateLLMConfigResponse> llm_config_post(update_llm_config_request)
-
-
-
-### Examples
-
-```ruby
-require 'time'
-require 'worka'
-
-api_instance = Worka::DefaultApi.new
-update_llm_config_request = Worka::UpdateLLMConfigRequest.new({api_key: 'api_key_example', model: 'model_example', provider: 'provider_example', temperature: 3.56, tenant_id: 3.56}) # UpdateLLMConfigRequest | 
-
-begin
-  
-  result = api_instance.llm_config_post(update_llm_config_request)
-  p result
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->llm_config_post: #{e}"
-end
-```
-
-#### Using the llm_config_post_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<UpdateLLMConfigResponse>, Integer, Hash)> llm_config_post_with_http_info(update_llm_config_request)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.llm_config_post_with_http_info(update_llm_config_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <UpdateLLMConfigResponse>
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->llm_config_post_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **update_llm_config_request** | [**UpdateLLMConfigRequest**](UpdateLLMConfigRequest.md) |  |  |
-
-### Return type
-
-[**UpdateLLMConfigResponse**](UpdateLLMConfigResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## tenant_post
-
-> <CreateTenantResponse> tenant_post(create_tenant_request)
+> <CreateTenantResponse> tenants_post(create_tenant_request)
 
 
 
@@ -216,28 +30,28 @@ create_tenant_request = Worka::CreateTenantRequest.new({determine_conversation_w
 
 begin
   
-  result = api_instance.tenant_post(create_tenant_request)
+  result = api_instance.tenants_post(create_tenant_request)
   p result
 rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->tenant_post: #{e}"
+  puts "Error when calling DefaultApi->tenants_post: #{e}"
 end
 ```
 
-#### Using the tenant_post_with_http_info variant
+#### Using the tenants_post_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateTenantResponse>, Integer, Hash)> tenant_post_with_http_info(create_tenant_request)
+> <Array(<CreateTenantResponse>, Integer, Hash)> tenants_post_with_http_info(create_tenant_request)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.tenant_post_with_http_info(create_tenant_request)
+  data, status_code, headers = api_instance.tenants_post_with_http_info(create_tenant_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateTenantResponse>
 rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->tenant_post_with_http_info: #{e}"
+  puts "Error when calling DefaultApi->tenants_post_with_http_info: #{e}"
 end
 ```
 
@@ -261,9 +75,9 @@ No authorization required
 - **Accept**: application/json
 
 
-## tool_put
+## tenants_tenant_id_agents_put
 
-> tool_put(tool_upsert)
+> <CreateAgentResponse> tenants_tenant_id_agents_put(tenant_id, upsert_agent_request)
 
 
 
@@ -274,31 +88,33 @@ require 'time'
 require 'worka'
 
 api_instance = Worka::DefaultApi.new
-tool_upsert = Worka::ToolUpsert.new({tenant_id: 3.56, tools: [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInner.new({function_declarations: [Worka::CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.new({description: 'description_example', name: 'name_example', parameters: 3.56})]})]}) # ToolUpsert | 
+tenant_id = 789 # Integer | 
+upsert_agent_request = Worka::UpsertAgentRequest.new({agents: [Worka::UpsertAgentRequestAgentsInner.new({created_at: Time.now, description: 'description_example', edges: [Worka::UpsertAgentRequestAgentsInnerEdgesInner.new({conditions: [3.56], priority: 37, target_agent_id: 3.56})], expected_input: 'expected_input_example', id: 3.56, name: 'name_example', rules: [Worka::UpsertAgentRequestAgentsInnerRulesInner.new({content: 'content_example', description: 'description_example', id: 3.56, name: 'name_example', position: 3.56, rule_created_at: Time.now, tenant_id: 3.56, version_created_at: Time.now, version_id: 3.56})], tenant_id: 3.56, tools: [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInner.new({function_declarations: [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.new({description: 'description_example', name: 'name_example', parameters: 3.56})]})]})]}) # UpsertAgentRequest | 
 
 begin
   
-  api_instance.tool_put(tool_upsert)
+  result = api_instance.tenants_tenant_id_agents_put(tenant_id, upsert_agent_request)
+  p result
 rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->tool_put: #{e}"
+  puts "Error when calling DefaultApi->tenants_tenant_id_agents_put: #{e}"
 end
 ```
 
-#### Using the tool_put_with_http_info variant
+#### Using the tenants_tenant_id_agents_put_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> tool_put_with_http_info(tool_upsert)
+> <Array(<CreateAgentResponse>, Integer, Hash)> tenants_tenant_id_agents_put_with_http_info(tenant_id, upsert_agent_request)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.tool_put_with_http_info(tool_upsert)
+  data, status_code, headers = api_instance.tenants_tenant_id_agents_put_with_http_info(tenant_id, upsert_agent_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <CreateAgentResponse>
 rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->tool_put_with_http_info: #{e}"
+  puts "Error when calling DefaultApi->tenants_tenant_id_agents_put_with_http_info: #{e}"
 end
 ```
 
@@ -306,7 +122,199 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tool_upsert** | [**ToolUpsert**](ToolUpsert.md) |  |  |
+| **tenant_id** | **Integer** |  |  |
+| **upsert_agent_request** | [**UpsertAgentRequest**](UpsertAgentRequest.md) |  |  |
+
+### Return type
+
+[**CreateAgentResponse**](CreateAgentResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## tenants_tenant_id_conversations_post
+
+> <CreateConversationResponse> tenants_tenant_id_conversations_post(tenant_id, create_conversation_under_tenant_request)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'worka'
+
+api_instance = Worka::DefaultApi.new
+tenant_id = 789 # Integer | 
+create_conversation_under_tenant_request = Worka::CreateConversationUnderTenantRequest.new # CreateConversationUnderTenantRequest | 
+
+begin
+  
+  result = api_instance.tenants_tenant_id_conversations_post(tenant_id, create_conversation_under_tenant_request)
+  p result
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_conversations_post: #{e}"
+end
+```
+
+#### Using the tenants_tenant_id_conversations_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateConversationResponse>, Integer, Hash)> tenants_tenant_id_conversations_post_with_http_info(tenant_id, create_conversation_under_tenant_request)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.tenants_tenant_id_conversations_post_with_http_info(tenant_id, create_conversation_under_tenant_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateConversationResponse>
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_conversations_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tenant_id** | **Integer** |  |  |
+| **create_conversation_under_tenant_request** | [**CreateConversationUnderTenantRequest**](CreateConversationUnderTenantRequest.md) |  |  |
+
+### Return type
+
+[**CreateConversationResponse**](CreateConversationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## tenants_tenant_id_llm_configs_post
+
+> <UpdateLLMConfigResponse> tenants_tenant_id_llm_configs_post(tenant_id, upsert_llm_config_request)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'worka'
+
+api_instance = Worka::DefaultApi.new
+tenant_id = 789 # Integer | 
+upsert_llm_config_request = Worka::UpsertLLMConfigRequest.new({api_key: 'api_key_example', model: 'model_example', provider: 'provider_example', temperature: 3.56}) # UpsertLLMConfigRequest | 
+
+begin
+  
+  result = api_instance.tenants_tenant_id_llm_configs_post(tenant_id, upsert_llm_config_request)
+  p result
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_llm_configs_post: #{e}"
+end
+```
+
+#### Using the tenants_tenant_id_llm_configs_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateLLMConfigResponse>, Integer, Hash)> tenants_tenant_id_llm_configs_post_with_http_info(tenant_id, upsert_llm_config_request)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.tenants_tenant_id_llm_configs_post_with_http_info(tenant_id, upsert_llm_config_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateLLMConfigResponse>
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_llm_configs_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tenant_id** | **Integer** |  |  |
+| **upsert_llm_config_request** | [**UpsertLLMConfigRequest**](UpsertLLMConfigRequest.md) |  |  |
+
+### Return type
+
+[**UpdateLLMConfigResponse**](UpdateLLMConfigResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## tenants_tenant_id_tools_put
+
+> tenants_tenant_id_tools_put(tenant_id, upsert_tool_request)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'worka'
+
+api_instance = Worka::DefaultApi.new
+tenant_id = 789 # Integer | 
+upsert_tool_request = Worka::UpsertToolRequest.new({tools: [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInner.new({function_declarations: [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.new({description: 'description_example', name: 'name_example', parameters: 3.56})]})]}) # UpsertToolRequest | 
+
+begin
+  
+  api_instance.tenants_tenant_id_tools_put(tenant_id, upsert_tool_request)
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_tools_put: #{e}"
+end
+```
+
+#### Using the tenants_tenant_id_tools_put_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> tenants_tenant_id_tools_put_with_http_info(tenant_id, upsert_tool_request)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.tenants_tenant_id_tools_put_with_http_info(tenant_id, upsert_tool_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_tools_put_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tenant_id** | **Integer** |  |  |
+| **upsert_tool_request** | [**UpsertToolRequest**](UpsertToolRequest.md) |  |  |
 
 ### Return type
 
@@ -322,9 +330,73 @@ No authorization required
 - **Accept**: Not defined
 
 
-## workflow_id_get
+## tenants_tenant_id_workflows_post
 
-> <GetWorkflowResponse> workflow_id_get(id)
+> <CreateWorkflowResponse> tenants_tenant_id_workflows_post(tenant_id, create_workflow_under_tenant_request)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'worka'
+
+api_instance = Worka::DefaultApi.new
+tenant_id = 789 # Integer | 
+create_workflow_under_tenant_request = Worka::CreateWorkflowUnderTenantRequest.new({freeform: false, input: 'input_example'}) # CreateWorkflowUnderTenantRequest | 
+
+begin
+  
+  result = api_instance.tenants_tenant_id_workflows_post(tenant_id, create_workflow_under_tenant_request)
+  p result
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_workflows_post: #{e}"
+end
+```
+
+#### Using the tenants_tenant_id_workflows_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateWorkflowResponse>, Integer, Hash)> tenants_tenant_id_workflows_post_with_http_info(tenant_id, create_workflow_under_tenant_request)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.tenants_tenant_id_workflows_post_with_http_info(tenant_id, create_workflow_under_tenant_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateWorkflowResponse>
+rescue Worka::ApiError => e
+  puts "Error when calling DefaultApi->tenants_tenant_id_workflows_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **tenant_id** | **Integer** |  |  |
+| **create_workflow_under_tenant_request** | [**CreateWorkflowUnderTenantRequest**](CreateWorkflowUnderTenantRequest.md) |  |  |
+
+### Return type
+
+[**CreateWorkflowResponse**](CreateWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## workflows_id_get
+
+> <GetWorkflowResponse> workflows_id_get(id)
 
 
 
@@ -339,28 +411,28 @@ id = 789 # Integer |
 
 begin
   
-  result = api_instance.workflow_id_get(id)
+  result = api_instance.workflows_id_get(id)
   p result
 rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->workflow_id_get: #{e}"
+  puts "Error when calling DefaultApi->workflows_id_get: #{e}"
 end
 ```
 
-#### Using the workflow_id_get_with_http_info variant
+#### Using the workflows_id_get_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetWorkflowResponse>, Integer, Hash)> workflow_id_get_with_http_info(id)
+> <Array(<GetWorkflowResponse>, Integer, Hash)> workflows_id_get_with_http_info(id)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.workflow_id_get_with_http_info(id)
+  data, status_code, headers = api_instance.workflows_id_get_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWorkflowResponse>
 rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->workflow_id_get_with_http_info: #{e}"
+  puts "Error when calling DefaultApi->workflows_id_get_with_http_info: #{e}"
 end
 ```
 
@@ -381,67 +453,5 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## workflow_post
-
-> <CreateWorkflowResponse> workflow_post(create_workflow_request)
-
-
-
-### Examples
-
-```ruby
-require 'time'
-require 'worka'
-
-api_instance = Worka::DefaultApi.new
-create_workflow_request = Worka::CreateWorkflowRequest.new({freeform: false, input: 'input_example', tenant_id: 3.56}) # CreateWorkflowRequest | 
-
-begin
-  
-  result = api_instance.workflow_post(create_workflow_request)
-  p result
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->workflow_post: #{e}"
-end
-```
-
-#### Using the workflow_post_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<CreateWorkflowResponse>, Integer, Hash)> workflow_post_with_http_info(create_workflow_request)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.workflow_post_with_http_info(create_workflow_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <CreateWorkflowResponse>
-rescue Worka::ApiError => e
-  puts "Error when calling DefaultApi->workflow_post_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **create_workflow_request** | [**CreateWorkflowRequest**](CreateWorkflowRequest.md) |  |  |
-
-### Return type
-
-[**CreateWorkflowResponse**](CreateWorkflowResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 

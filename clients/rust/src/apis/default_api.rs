@@ -15,172 +15,61 @@ use crate::{apis::ResponseContent, models};
 use super::{Error, configuration, ContentType};
 
 
-/// struct for typed errors of method [`agent_put`]
+/// struct for typed errors of method [`tenants_post`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum AgentPutError {
+pub enum TenantsPostError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`conversation_post`]
+/// struct for typed errors of method [`tenants_tenant_id_agents_put`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum ConversationPostError {
+pub enum TenantsTenantIdAgentsPutError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`llm_config_post`]
+/// struct for typed errors of method [`tenants_tenant_id_conversations_post`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum LlmConfigPostError {
+pub enum TenantsTenantIdConversationsPostError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`tenant_post`]
+/// struct for typed errors of method [`tenants_tenant_id_llm_configs_post`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum TenantPostError {
+pub enum TenantsTenantIdLlmConfigsPostError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`tool_put`]
+/// struct for typed errors of method [`tenants_tenant_id_tools_put`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum ToolPutError {
+pub enum TenantsTenantIdToolsPutError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`workflow_id_get`]
+/// struct for typed errors of method [`tenants_tenant_id_workflows_post`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum WorkflowIdGetError {
+pub enum TenantsTenantIdWorkflowsPostError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`workflow_post`]
+/// struct for typed errors of method [`workflows_id_get`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum WorkflowPostError {
+pub enum WorkflowsIdGetError {
     UnknownValue(serde_json::Value),
 }
 
 
-pub async fn agent_put(configuration: &configuration::Configuration, create_agent_request: models::CreateAgentRequest) -> Result<models::CreateAgentResponse, Error<AgentPutError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_create_agent_request = create_agent_request;
-
-    let uri_str = format!("{}/agent", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    req_builder = req_builder.json(&p_create_agent_request);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateAgentResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CreateAgentResponse`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<AgentPutError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-pub async fn conversation_post(configuration: &configuration::Configuration, create_conversation_request: models::CreateConversationRequest) -> Result<models::CreateConversationResponse, Error<ConversationPostError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_create_conversation_request = create_conversation_request;
-
-    let uri_str = format!("{}/conversation", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    req_builder = req_builder.json(&p_create_conversation_request);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateConversationResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CreateConversationResponse`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<ConversationPostError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-pub async fn llm_config_post(configuration: &configuration::Configuration, update_llm_config_request: models::UpdateLlmConfigRequest) -> Result<models::UpdateLlmConfigResponse, Error<LlmConfigPostError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_update_llm_config_request = update_llm_config_request;
-
-    let uri_str = format!("{}/llm_config", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    req_builder = req_builder.json(&p_update_llm_config_request);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::UpdateLlmConfigResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::UpdateLlmConfigResponse`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<LlmConfigPostError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-pub async fn tenant_post(configuration: &configuration::Configuration, create_tenant_request: models::CreateTenantRequest) -> Result<models::CreateTenantResponse, Error<TenantPostError>> {
+pub async fn tenants_post(configuration: &configuration::Configuration, create_tenant_request: models::CreateTenantRequest) -> Result<models::CreateTenantResponse, Error<TenantsPostError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_create_tenant_request = create_tenant_request;
 
-    let uri_str = format!("{}/tenant", configuration.base_path);
+    let uri_str = format!("{}/tenants", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -208,22 +97,137 @@ pub async fn tenant_post(configuration: &configuration::Configuration, create_te
         }
     } else {
         let content = resp.text().await?;
-        let entity: Option<TenantPostError> = serde_json::from_str(&content).ok();
+        let entity: Option<TenantsPostError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub async fn tool_put(configuration: &configuration::Configuration, tool_upsert: models::ToolUpsert) -> Result<(), Error<ToolPutError>> {
+pub async fn tenants_tenant_id_agents_put(configuration: &configuration::Configuration, tenant_id: i64, upsert_agent_request: models::UpsertAgentRequest) -> Result<models::CreateAgentResponse, Error<TenantsTenantIdAgentsPutError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_tool_upsert = tool_upsert;
+    let p_tenant_id = tenant_id;
+    let p_upsert_agent_request = upsert_agent_request;
 
-    let uri_str = format!("{}/tool", configuration.base_path);
+    let uri_str = format!("{}/tenants/{tenant_id}/agents", configuration.base_path, tenant_id=p_tenant_id);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
-    req_builder = req_builder.json(&p_tool_upsert);
+    req_builder = req_builder.json(&p_upsert_agent_request);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateAgentResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CreateAgentResponse`")))),
+        }
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<TenantsTenantIdAgentsPutError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+pub async fn tenants_tenant_id_conversations_post(configuration: &configuration::Configuration, tenant_id: i64, create_conversation_under_tenant_request: models::CreateConversationUnderTenantRequest) -> Result<models::CreateConversationResponse, Error<TenantsTenantIdConversationsPostError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_tenant_id = tenant_id;
+    let p_create_conversation_under_tenant_request = create_conversation_under_tenant_request;
+
+    let uri_str = format!("{}/tenants/{tenant_id}/conversations", configuration.base_path, tenant_id=p_tenant_id);
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    req_builder = req_builder.json(&p_create_conversation_under_tenant_request);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateConversationResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CreateConversationResponse`")))),
+        }
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<TenantsTenantIdConversationsPostError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+pub async fn tenants_tenant_id_llm_configs_post(configuration: &configuration::Configuration, tenant_id: i64, upsert_llm_config_request: models::UpsertLlmConfigRequest) -> Result<models::UpdateLlmConfigResponse, Error<TenantsTenantIdLlmConfigsPostError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_tenant_id = tenant_id;
+    let p_upsert_llm_config_request = upsert_llm_config_request;
+
+    let uri_str = format!("{}/tenants/{tenant_id}/llm-configs", configuration.base_path, tenant_id=p_tenant_id);
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    req_builder = req_builder.json(&p_upsert_llm_config_request);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::UpdateLlmConfigResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::UpdateLlmConfigResponse`")))),
+        }
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<TenantsTenantIdLlmConfigsPostError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+pub async fn tenants_tenant_id_tools_put(configuration: &configuration::Configuration, tenant_id: i64, upsert_tool_request: models::UpsertToolRequest) -> Result<(), Error<TenantsTenantIdToolsPutError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_tenant_id = tenant_id;
+    let p_upsert_tool_request = upsert_tool_request;
+
+    let uri_str = format!("{}/tenants/{tenant_id}/tools", configuration.base_path, tenant_id=p_tenant_id);
+    let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    req_builder = req_builder.json(&p_upsert_tool_request);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -234,16 +238,54 @@ pub async fn tool_put(configuration: &configuration::Configuration, tool_upsert:
         Ok(())
     } else {
         let content = resp.text().await?;
-        let entity: Option<ToolPutError> = serde_json::from_str(&content).ok();
+        let entity: Option<TenantsTenantIdToolsPutError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
-pub async fn workflow_id_get(configuration: &configuration::Configuration, id: i64) -> Result<models::GetWorkflowResponse, Error<WorkflowIdGetError>> {
+pub async fn tenants_tenant_id_workflows_post(configuration: &configuration::Configuration, tenant_id: i64, create_workflow_under_tenant_request: models::CreateWorkflowUnderTenantRequest) -> Result<models::CreateWorkflowResponse, Error<TenantsTenantIdWorkflowsPostError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_tenant_id = tenant_id;
+    let p_create_workflow_under_tenant_request = create_workflow_under_tenant_request;
+
+    let uri_str = format!("{}/tenants/{tenant_id}/workflows", configuration.base_path, tenant_id=p_tenant_id);
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    req_builder = req_builder.json(&p_create_workflow_under_tenant_request);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateWorkflowResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CreateWorkflowResponse`")))),
+        }
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<TenantsTenantIdWorkflowsPostError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+pub async fn workflows_id_get(configuration: &configuration::Configuration, id: i64) -> Result<models::GetWorkflowResponse, Error<WorkflowsIdGetError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
 
-    let uri_str = format!("{}/workflow/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/workflows/{id}", configuration.base_path, id=p_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref user_agent) = configuration.user_agent {
@@ -270,44 +312,7 @@ pub async fn workflow_id_get(configuration: &configuration::Configuration, id: i
         }
     } else {
         let content = resp.text().await?;
-        let entity: Option<WorkflowIdGetError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-pub async fn workflow_post(configuration: &configuration::Configuration, create_workflow_request: models::CreateWorkflowRequest) -> Result<models::CreateWorkflowResponse, Error<WorkflowPostError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_create_workflow_request = create_workflow_request;
-
-    let uri_str = format!("{}/workflow", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    req_builder = req_builder.json(&p_create_workflow_request);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateWorkflowResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CreateWorkflowResponse`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<WorkflowPostError> = serde_json::from_str(&content).ok();
+        let entity: Option<WorkflowsIdGetError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

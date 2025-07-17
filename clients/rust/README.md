@@ -26,36 +26,36 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**agent_put**](docs/DefaultApi.md#agent_put) | **PUT** /agent | 
-*DefaultApi* | [**conversation_post**](docs/DefaultApi.md#conversation_post) | **POST** /conversation | 
-*DefaultApi* | [**llm_config_post**](docs/DefaultApi.md#llm_config_post) | **POST** /llm_config | 
-*DefaultApi* | [**tenant_post**](docs/DefaultApi.md#tenant_post) | **POST** /tenant | 
-*DefaultApi* | [**tool_put**](docs/DefaultApi.md#tool_put) | **PUT** /tool | 
-*DefaultApi* | [**workflow_id_get**](docs/DefaultApi.md#workflow_id_get) | **GET** /workflow/{id} | 
-*DefaultApi* | [**workflow_post**](docs/DefaultApi.md#workflow_post) | **POST** /workflow | 
+*DefaultApi* | [**tenants_post**](docs/DefaultApi.md#tenants_post) | **POST** /tenants | 
+*DefaultApi* | [**tenants_tenant_id_agents_put**](docs/DefaultApi.md#tenants_tenant_id_agents_put) | **PUT** /tenants/{tenant_id}/agents | 
+*DefaultApi* | [**tenants_tenant_id_conversations_post**](docs/DefaultApi.md#tenants_tenant_id_conversations_post) | **POST** /tenants/{tenant_id}/conversations | 
+*DefaultApi* | [**tenants_tenant_id_llm_configs_post**](docs/DefaultApi.md#tenants_tenant_id_llm_configs_post) | **POST** /tenants/{tenant_id}/llm-configs | 
+*DefaultApi* | [**tenants_tenant_id_tools_put**](docs/DefaultApi.md#tenants_tenant_id_tools_put) | **PUT** /tenants/{tenant_id}/tools | 
+*DefaultApi* | [**tenants_tenant_id_workflows_post**](docs/DefaultApi.md#tenants_tenant_id_workflows_post) | **POST** /tenants/{tenant_id}/workflows | 
+*DefaultApi* | [**workflows_id_get**](docs/DefaultApi.md#workflows_id_get) | **GET** /workflows/{id} | 
 
 
 ## Documentation For Models
 
- - [CreateAgentRequest](docs/CreateAgentRequest.md)
- - [CreateAgentRequestAgentsInner](docs/CreateAgentRequestAgentsInner.md)
- - [CreateAgentRequestAgentsInnerEdgesInner](docs/CreateAgentRequestAgentsInnerEdgesInner.md)
- - [CreateAgentRequestAgentsInnerRulesInner](docs/CreateAgentRequestAgentsInnerRulesInner.md)
- - [CreateAgentRequestAgentsInnerRulesInnerToolsInner](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInner.md)
- - [CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.md)
- - [CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal](docs/CreateAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal.md)
  - [CreateAgentResponse](docs/CreateAgentResponse.md)
- - [CreateConversationRequest](docs/CreateConversationRequest.md)
  - [CreateConversationResponse](docs/CreateConversationResponse.md)
+ - [CreateConversationUnderTenantRequest](docs/CreateConversationUnderTenantRequest.md)
  - [CreateTenantRequest](docs/CreateTenantRequest.md)
  - [CreateTenantResponse](docs/CreateTenantResponse.md)
- - [CreateWorkflowRequest](docs/CreateWorkflowRequest.md)
- - [CreateWorkflowRequestGenerationConfig](docs/CreateWorkflowRequestGenerationConfig.md)
  - [CreateWorkflowResponse](docs/CreateWorkflowResponse.md)
+ - [CreateWorkflowUnderTenantRequest](docs/CreateWorkflowUnderTenantRequest.md)
+ - [CreateWorkflowUnderTenantRequestGenerationConfig](docs/CreateWorkflowUnderTenantRequestGenerationConfig.md)
  - [GetWorkflowResponse](docs/GetWorkflowResponse.md)
- - [ToolUpsert](docs/ToolUpsert.md)
- - [UpdateLlmConfigRequest](docs/UpdateLlmConfigRequest.md)
  - [UpdateLlmConfigResponse](docs/UpdateLlmConfigResponse.md)
+ - [UpsertAgentRequest](docs/UpsertAgentRequest.md)
+ - [UpsertAgentRequestAgentsInner](docs/UpsertAgentRequestAgentsInner.md)
+ - [UpsertAgentRequestAgentsInnerEdgesInner](docs/UpsertAgentRequestAgentsInnerEdgesInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInner](docs/UpsertAgentRequestAgentsInnerRulesInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInnerToolsInner](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.md)
+ - [UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal](docs/UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInnerInternal.md)
+ - [UpsertLlmConfigRequest](docs/UpsertLlmConfigRequest.md)
+ - [UpsertToolRequest](docs/UpsertToolRequest.md)
 
 
 To get access to the crate's generated documentation, use:

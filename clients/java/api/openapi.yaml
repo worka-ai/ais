@@ -5,61 +5,7 @@ info:
 servers:
 - url: /
 paths:
-  /agent:
-    put:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateAgentRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateAgentResponse"
-          description: OK
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /conversation:
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateConversationRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateConversationResponse"
-          description: OK
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /llm_config:
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateLLMConfigRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateLLMConfigResponse"
-          description: OK
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /tenant:
+  /tenants:
     post:
       requestBody:
         content:
@@ -77,25 +23,124 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /tool:
+  /tenants/{tenant_id}/agents:
     put:
+      parameters:
+      - explode: false
+        in: path
+        name: tenant_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ToolUpsert"
+              $ref: "#/components/schemas/UpsertAgentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateAgentResponse"
+          description: OK
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /tenants/{tenant_id}/conversations:
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: tenant_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateConversationUnderTenantRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateConversationResponse"
+          description: OK
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /tenants/{tenant_id}/llm-configs:
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: tenant_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertLLMConfigRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateLLMConfigResponse"
+          description: OK
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /tenants/{tenant_id}/tools:
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: tenant_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertToolRequest"
         required: true
       responses: {}
       x-content-type: application/json
       x-accepts:
       - application/json
-  /workflow:
+  /tenants/{tenant_id}/workflows:
     post:
+      parameters:
+      - explode: false
+        in: path
+        name: tenant_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateWorkflowRequest"
+              $ref: "#/components/schemas/CreateWorkflowUnderTenantRequest"
         required: true
       responses:
         "200":
@@ -107,7 +152,7 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /workflow/{id}:
+  /workflows/{id}:
     get:
       parameters:
       - explode: false
@@ -129,414 +174,6 @@ paths:
       - application/json
 components:
   schemas:
-    CreateAgentRequest:
-      description: CreateAgent
-      example:
-        agents:
-        - tenant_id: 4
-          examples:
-          - examples
-          - examples
-          expected_input: expected_input
-          edges:
-          - script_condition: script_condition
-            target_agent_id: 1
-            conditions:
-            - 0
-            - 0
-            priority: 6
-          - script_condition: script_condition
-            target_agent_id: 1
-            conditions:
-            - 0
-            - 0
-            priority: 6
-          name: name
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
-          rules:
-          - tenant_id: 7
-            version_created_at: 2000-01-23T04:56:07.000+00:00
-            name: name
-            description: description
-            id: 5
-            position: 2
-            version_id: 2
-            rule_created_at: 2000-01-23T04:56:07.000+00:00
-            tools:
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            content: content
-            tags:
-            - tags
-            - tags
-          - tenant_id: 7
-            version_created_at: 2000-01-23T04:56:07.000+00:00
-            name: name
-            description: description
-            id: 5
-            position: 2
-            version_id: 2
-            rule_created_at: 2000-01-23T04:56:07.000+00:00
-            tools:
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            content: content
-            tags:
-            - tags
-            - tags
-          id: 5
-          is_default: 2000-01-23T04:56:07.000+00:00
-          tools:
-          - name: name
-            description: description
-            id: 3
-            function_declarations:
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-          - name: name
-            description: description
-            id: 3
-            function_declarations:
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-          tags:
-          - tags
-          - tags
-        - tenant_id: 4
-          examples:
-          - examples
-          - examples
-          expected_input: expected_input
-          edges:
-          - script_condition: script_condition
-            target_agent_id: 1
-            conditions:
-            - 0
-            - 0
-            priority: 6
-          - script_condition: script_condition
-            target_agent_id: 1
-            conditions:
-            - 0
-            - 0
-            priority: 6
-          name: name
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
-          rules:
-          - tenant_id: 7
-            version_created_at: 2000-01-23T04:56:07.000+00:00
-            name: name
-            description: description
-            id: 5
-            position: 2
-            version_id: 2
-            rule_created_at: 2000-01-23T04:56:07.000+00:00
-            tools:
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            content: content
-            tags:
-            - tags
-            - tags
-          - tenant_id: 7
-            version_created_at: 2000-01-23T04:56:07.000+00:00
-            name: name
-            description: description
-            id: 5
-            position: 2
-            version_id: 2
-            rule_created_at: 2000-01-23T04:56:07.000+00:00
-            tools:
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            - name: name
-              description: description
-              id: 3
-              function_declarations:
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-              - internal:
-                  provider: provider
-                  tags:
-                  - tags
-                  - tags
-                response: "{}"
-                name: name
-                description: description
-                id: 9
-                parameters: "{}"
-            content: content
-            tags:
-            - tags
-            - tags
-          id: 5
-          is_default: 2000-01-23T04:56:07.000+00:00
-          tools:
-          - name: name
-            description: description
-            id: 3
-            function_declarations:
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-          - name: name
-            description: description
-            id: 3
-            function_declarations:
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-            - internal:
-                provider: provider
-                tags:
-                - tags
-                - tags
-              response: "{}"
-              name: name
-              description: description
-              id: 9
-              parameters: "{}"
-          tags:
-          - tags
-          - tags
-      properties:
-        agents:
-          items:
-            $ref: "#/components/schemas/CreateAgentRequest_agents_inner"
-          type: array
-      required:
-      - agents
-      type: object
     CreateAgentResponse:
       example:
         id: 0
@@ -547,17 +184,6 @@ components:
       required:
       - id
       type: object
-    CreateConversationRequest:
-      description: CreateConversation
-      example:
-        tenant_id: 0
-      properties:
-        tenant_id:
-          format: int64
-          type: integer
-      required:
-      - tenant_id
-      type: object
     CreateConversationResponse:
       example:
         conversation_id: 0
@@ -567,6 +193,21 @@ components:
           type: integer
       required:
       - conversation_id
+      type: object
+    CreateConversationUnderTenantRequest:
+      description: CreateConversation (under a tenant)
+      example:
+        title: title
+        tags:
+        - tags
+        - tags
+      properties:
+        tags:
+          items:
+            type: string
+          type: array
+        title:
+          type: string
       type: object
     CreateTenantRequest:
       description: CreateTenant
@@ -602,11 +243,20 @@ components:
       required:
       - tenant_id
       type: object
-    CreateWorkflowRequest:
-      description: CreateWorkflow
+    CreateWorkflowResponse:
+      example:
+        workflow_id: 0
+      properties:
+        workflow_id:
+          format: int64
+          type: integer
+      required:
+      - workflow_id
+      type: object
+    CreateWorkflowUnderTenantRequest:
+      description: CreateWorkflow (under a tenant)
       example:
         cron: cron
-        tenant_id: 2
         input: input
         output_event_weight: 3.616076749251911
         agent_id: 0
@@ -637,7 +287,7 @@ components:
         freeform:
           type: boolean
         generation_config:
-          $ref: "#/components/schemas/CreateWorkflowRequest_generation_config"
+          $ref: "#/components/schemas/CreateWorkflowUnderTenantRequest_generation_config"
         input:
           type: string
         input_event_weight:
@@ -646,23 +296,9 @@ components:
         output_event_weight:
           format: double
           type: number
-        tenant_id:
-          format: int64
-          type: integer
       required:
       - freeform
       - input
-      - tenant_id
-      type: object
-    CreateWorkflowResponse:
-      example:
-        workflow_id: 0
-      properties:
-        workflow_id:
-          format: int64
-          type: integer
-      required:
-      - workflow_id
       type: object
     GetWorkflowResponse:
       description: GetWorkflow
@@ -678,75 +314,426 @@ components:
       required:
       - events
       type: object
-    ToolUpsert:
-      description: Payload for `/tool` PUT
+    UpdateLLMConfigResponse:
       example:
-        tenant_id: 0
-        tools:
-        - name: name
-          description: description
-          id: 3
-          function_declarations:
-          - internal:
-              provider: provider
-              tags:
-              - tags
-              - tags
-            response: "{}"
-            name: name
-            description: description
-            id: 9
-            parameters: "{}"
-          - internal:
-              provider: provider
-              tags:
-              - tags
-              - tags
-            response: "{}"
-            name: name
-            description: description
-            id: 9
-            parameters: "{}"
-        - name: name
-          description: description
-          id: 3
-          function_declarations:
-          - internal:
-              provider: provider
-              tags:
-              - tags
-              - tags
-            response: "{}"
-            name: name
-            description: description
-            id: 9
-            parameters: "{}"
-          - internal:
-              provider: provider
-              tags:
-              - tags
-              - tags
-            response: "{}"
-            name: name
-            description: description
-            id: 9
-            parameters: "{}"
+        message: message
       properties:
-        tenant_id:
-          format: int64
-          type: integer
-        tools:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    UpsertAgentRequest:
+      description: UpsertAgent (under a tenant)
+      example:
+        agents:
+        - tenant_id: 4
+          examples:
+          - examples
+          - examples
+          expected_input: expected_input
+          edges:
+          - script_condition: script_condition
+            target_agent_id: 1
+            conditions:
+            - 0
+            - 0
+            priority: 6
+          - script_condition: script_condition
+            target_agent_id: 1
+            conditions:
+            - 0
+            - 0
+            priority: 6
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          rules:
+          - tenant_id: 7
+            version_created_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            description: description
+            id: 5
+            position: 2
+            version_id: 2
+            rule_created_at: 2000-01-23T04:56:07.000+00:00
+            tools:
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            content: content
+            tags:
+            - tags
+            - tags
+          - tenant_id: 7
+            version_created_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            description: description
+            id: 5
+            position: 2
+            version_id: 2
+            rule_created_at: 2000-01-23T04:56:07.000+00:00
+            tools:
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            content: content
+            tags:
+            - tags
+            - tags
+          id: 5
+          is_default: 2000-01-23T04:56:07.000+00:00
+          tools:
+          - name: name
+            description: description
+            id: 3
+            function_declarations:
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+          - name: name
+            description: description
+            id: 3
+            function_declarations:
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+          tags:
+          - tags
+          - tags
+        - tenant_id: 4
+          examples:
+          - examples
+          - examples
+          expected_input: expected_input
+          edges:
+          - script_condition: script_condition
+            target_agent_id: 1
+            conditions:
+            - 0
+            - 0
+            priority: 6
+          - script_condition: script_condition
+            target_agent_id: 1
+            conditions:
+            - 0
+            - 0
+            priority: 6
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          rules:
+          - tenant_id: 7
+            version_created_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            description: description
+            id: 5
+            position: 2
+            version_id: 2
+            rule_created_at: 2000-01-23T04:56:07.000+00:00
+            tools:
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            content: content
+            tags:
+            - tags
+            - tags
+          - tenant_id: 7
+            version_created_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            description: description
+            id: 5
+            position: 2
+            version_id: 2
+            rule_created_at: 2000-01-23T04:56:07.000+00:00
+            tools:
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            - name: name
+              description: description
+              id: 3
+              function_declarations:
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+              - internal:
+                  provider: provider
+                  tags:
+                  - tags
+                  - tags
+                response: "{}"
+                name: name
+                description: description
+                id: 9
+                parameters: "{}"
+            content: content
+            tags:
+            - tags
+            - tags
+          id: 5
+          is_default: 2000-01-23T04:56:07.000+00:00
+          tools:
+          - name: name
+            description: description
+            id: 3
+            function_declarations:
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+          - name: name
+            description: description
+            id: 3
+            function_declarations:
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+            - internal:
+                provider: provider
+                tags:
+                - tags
+                - tags
+              response: "{}"
+              name: name
+              description: description
+              id: 9
+              parameters: "{}"
+          tags:
+          - tags
+          - tags
+      properties:
+        agents:
           items:
-            $ref: "#/components/schemas/CreateAgentRequest_agents_inner_rules_inner_tools_inner"
+            $ref: "#/components/schemas/UpsertAgentRequest_agents_inner"
           type: array
       required:
-      - tenant_id
-      - tools
+      - agents
       type: object
-    UpdateLLMConfigRequest:
-      description: UpdateLLMConfig
+    UpsertLLMConfigRequest:
+      description: UpsertLLMConfig (under a tenant)
       example:
-        tenant_id: 5
         workflow_id: 5
         api_key: api_key
         project_id: project_id
@@ -776,9 +763,6 @@ components:
         temperature:
           format: double
           type: number
-        tenant_id:
-          format: int64
-          type: integer
         workflow_id:
           format: int64
           type: integer
@@ -787,18 +771,99 @@ components:
       - model
       - provider
       - temperature
-      - tenant_id
       type: object
-    UpdateLLMConfigResponse:
+    UpsertToolRequest:
+      description: UpsertTool (under a tenant)
       example:
-        message: message
+        tools:
+        - name: name
+          description: description
+          id: 3
+          function_declarations:
+          - internal:
+              provider: provider
+              tags:
+              - tags
+              - tags
+            response: "{}"
+            name: name
+            description: description
+            id: 9
+            parameters: "{}"
+          - internal:
+              provider: provider
+              tags:
+              - tags
+              - tags
+            response: "{}"
+            name: name
+            description: description
+            id: 9
+            parameters: "{}"
+        - name: name
+          description: description
+          id: 3
+          function_declarations:
+          - internal:
+              provider: provider
+              tags:
+              - tags
+              - tags
+            response: "{}"
+            name: name
+            description: description
+            id: 9
+            parameters: "{}"
+          - internal:
+              provider: provider
+              tags:
+              - tags
+              - tags
+            response: "{}"
+            name: name
+            description: description
+            id: 9
+            parameters: "{}"
       properties:
-        message:
-          type: string
+        tools:
+          items:
+            $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_rules_inner_tools_inner"
+          type: array
       required:
-      - message
+      - tools
       type: object
-    CreateAgentRequest_agents_inner_edges_inner:
+    CreateWorkflowUnderTenantRequest_generation_config:
+      example:
+        top_p: 7.061401241503109
+        stop_sequences:
+        - stop_sequences
+        - stop_sequences
+        candidate_count: 1
+        top_k: 2
+        temperature: 5.637376656633329
+        max_output_tokens: 5
+      properties:
+        candidate_count:
+          format: int32
+          type: integer
+        max_output_tokens:
+          format: int32
+          type: integer
+        stop_sequences:
+          items:
+            type: string
+          type: array
+        temperature:
+          format: double
+          type: number
+        top_k:
+          format: int32
+          type: integer
+        top_p:
+          format: double
+          type: number
+      type: object
+    UpsertAgentRequest_agents_inner_edges_inner:
       example:
         script_condition: script_condition
         target_agent_id: 1
@@ -834,7 +899,7 @@ components:
       - priority
       - target_agent_id
       type: object
-    CreateAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner_internal:
+    UpsertAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner_internal:
       example:
         provider: provider
         tags:
@@ -850,7 +915,7 @@ components:
       required:
       - provider
       type: object
-    CreateAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner:
+    UpsertAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner:
       example:
         internal:
           provider: provider
@@ -869,7 +934,7 @@ components:
           format: int64
           type: integer
         internal:
-          $ref: "#/components/schemas/CreateAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner_internal"
+          $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner_internal"
         name:
           description: "Required. The name of the function to call. Must start with\
             \ a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores,\
@@ -884,7 +949,7 @@ components:
       - name
       - parameters
       type: object
-    CreateAgentRequest_agents_inner_rules_inner_tools_inner:
+    UpsertAgentRequest_agents_inner_rules_inner_tools_inner:
       example:
         name: name
         description: description
@@ -915,7 +980,7 @@ components:
           type: string
         function_declarations:
           items:
-            $ref: "#/components/schemas/CreateAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner"
+            $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner"
           type: array
         id:
           format: int64
@@ -925,7 +990,7 @@ components:
       required:
       - function_declarations
       type: object
-    CreateAgentRequest_agents_inner_rules_inner:
+    UpsertAgentRequest_agents_inner_rules_inner:
       example:
         tenant_id: 7
         version_created_at: 2000-01-23T04:56:07.000+00:00
@@ -1013,7 +1078,7 @@ components:
           type: integer
         tools:
           items:
-            $ref: "#/components/schemas/CreateAgentRequest_agents_inner_rules_inner_tools_inner"
+            $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_rules_inner_tools_inner"
           type: array
         version_created_at:
           format: date-time
@@ -1032,7 +1097,7 @@ components:
       - version_created_at
       - version_id
       type: object
-    CreateAgentRequest_agents_inner:
+    UpsertAgentRequest_agents_inner:
       example:
         tenant_id: 4
         examples:
@@ -1240,7 +1305,7 @@ components:
           type: string
         edges:
           items:
-            $ref: "#/components/schemas/CreateAgentRequest_agents_inner_edges_inner"
+            $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_edges_inner"
           type: array
         examples:
           items:
@@ -1259,7 +1324,7 @@ components:
           type: string
         rules:
           items:
-            $ref: "#/components/schemas/CreateAgentRequest_agents_inner_rules_inner"
+            $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_rules_inner"
           type: array
         tags:
           items:
@@ -1270,7 +1335,7 @@ components:
           type: integer
         tools:
           items:
-            $ref: "#/components/schemas/CreateAgentRequest_agents_inner_rules_inner_tools_inner"
+            $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_rules_inner_tools_inner"
           type: array
       required:
       - created_at
@@ -1282,36 +1347,5 @@ components:
       - rules
       - tenant_id
       - tools
-      type: object
-    CreateWorkflowRequest_generation_config:
-      example:
-        top_p: 7.061401241503109
-        stop_sequences:
-        - stop_sequences
-        - stop_sequences
-        candidate_count: 1
-        top_k: 2
-        temperature: 5.637376656633329
-        max_output_tokens: 5
-      properties:
-        candidate_count:
-          format: int32
-          type: integer
-        max_output_tokens:
-          format: int32
-          type: integer
-        stop_sequences:
-          items:
-            type: string
-          type: array
-        temperature:
-          format: double
-          type: number
-        top_k:
-          format: int32
-          type: integer
-        top_p:
-          format: double
-          type: number
       type: object
 

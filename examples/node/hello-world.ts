@@ -1,13 +1,18 @@
 // hello.ts
 import {
-    CreateAgentRequestAgentsInner,
-    CreateAgentRequestAgentsInnerEdgesInner,
-    CreateAgentRequestAgentsInnerRulesInner,
-    CreateWorkflowRequest,
+    CreateConversationResponse,
+    CreateConversationUnderTenantRequest,
+    CreateTenantRequest,
+    CreateWorkflowResponse,
+    CreateWorkflowUnderTenantRequest,
     DefaultApi,
     GetWorkflowResponse,
-    ToolUpsert,
-    UpdateLLMConfigRequest
+    UpdateLLMConfigResponse,
+    UpsertAgentRequest,
+    UpsertAgentRequestAgentsInner,
+    UpsertAgentRequestAgentsInnerRulesInner,
+    UpsertLLMConfigRequest,
+    UpsertToolRequest,
 } from '../../clients/node/api';
 
 // ───────────────────────────────────────────────────────────────────────────────
@@ -28,45 +33,45 @@ async function main() {
     // ───────────────────────────────────────────────────────────────────────────────
     // 1️⃣ Create a new tenant for the support workflow.
     // ───────────────────────────────────────────────────────────────────────────────
-    // const tenantReq: CreateTenantRequest = {
-    //     tenantId: TENANT_ID,
-    //     username: 'support_bot',
-    //     determineConversationWithNarrative: 'narrative',
-    //     determineConversationWithAgent: 0
-    // };
-    // const {body: tenantResp} = await api.tenantPost(tenantReq);
-    // const tenantId = tenantResp.tenantId;
-    // console.log('✅ Tenant created:', tenantId);
-    let tenantId = TENANT_ID;
+    const tenantReq: CreateTenantRequest = {
+        tenantId: TENANT_ID,
+        username: 'support_bot',
+        determineConversationWithNarrative: 'narrative',
+        determineConversationWithAgent: 0
+    };
+    const {body: tenantResp} = await api.tenantsPost(tenantReq);
+    const tenantId = tenantResp.tenantId;
+    console.log('✅ Tenant created:', tenantId);
     // ───────────────────────────────────────────────────────────────────────────────
     // 2️⃣ Add two LLM configs (Gemini & Vertex).
     // ───────────────────────────────────────────────────────────────────────────────
-    const geminiReq: UpdateLLMConfigRequest = {
-        tenantId,
+    const geminiReq: UpsertLLMConfigRequest = {
+        id: 1,
         provider: 'googlegemini', //googlegemini | chatgpt
         apiKey: 'GEMINI_API_KEY',
         model: 'gemini-pro',
         temperature: 0.7
     };
-    await api.llmConfigPost(geminiReq);
+    const {body: geminiResp}: { body: UpdateLLMConfigResponse } =
+        await api.tenantsTenantIdLlmConfigsPost(tenantId, geminiReq);
     console.log('✅ Gemini config added');
 
-    const vertexReq: UpdateLLMConfigRequest = {
-        tenantId,
+    const vertexReq: UpsertLLMConfigRequest = {
+        id: 2,
         provider: 'googlevertex', //googlegemini | chatgpt
         apiKey: 'VERTEX_API_KEY',
         model: 'chat-bison',
         temperature: 0.5
     };
-    await api.llmConfigPost(vertexReq);
+    const {body: vertexResp}: { body: UpdateLLMConfigResponse } =
+        await api.tenantsTenantIdLlmConfigsPost(tenantId, vertexReq);
     console.log('✅ Vertex config added');
 
     // ───────────────────────────────────────────────────────────────────────────────
     // 3️⃣ Register five tools for email parsing, KB lookup, ticket search,
     //    response drafting, and quality checking.
     // ───────────────────────────────────────────────────────────────────────────────
-    const toolUpsert: ToolUpsert = {
-        tenantId,
+    const toolUpsert: UpsertToolRequest = {
         tools: [
             {
                 name: 'parse_email',
@@ -130,14 +135,14 @@ async function main() {
             }
         ]
     };
-    await api.toolPut(toolUpsert);
+    await api.tenantsTenantIdToolsPut(tenantId, toolUpsert);
     console.log('✅ Tools registered');
 
     // ───────────────────────────────────────────────────────────────────────────────
     // 4️⃣ Register five agents with edges for triage workflow.
     // ───────────────────────────────────────────────────────────────────────────────
     const now = new Date();
-    const sampleRule: CreateAgentRequestAgentsInnerRulesInner = {
+    const sampleRule: UpsertAgentRequestAgentsInnerRulesInner = {
         id: 1,
         name: 'AlwaysRun',
         description: 'Default rule to always execute',
@@ -150,7 +155,7 @@ async function main() {
     };
 
     // Use placeholder numeric IDs here; after creating agents you'll get real IDs to wire edges
-    const inboxScanner: CreateAgentRequestAgentsInner = {
+    const inboxScanner: UpsertAgentRequestAgentsInner = {
         id: INBOX_SCANNER_ID,
         name: 'InboxScanner',
         description: 'Parses incoming support emails',
@@ -166,13 +171,13 @@ async function main() {
             }
         ],
         edges: [
-            { targetAgentId: KB_LOOKUP_ID, conditions: [], priority: 1 },
-            { targetAgentId: TICKET_SEARCH_ID, conditions: [], priority: 1 }
+            {targetAgentId: KB_LOOKUP_ID, conditions: [], priority: 1},
+            {targetAgentId: TICKET_SEARCH_ID, conditions: [], priority: 1}
         ],
         examples: ['Subject: Error 500\nBody: Customer cannot upload file'],
         tags: ['email', 'parsing']
     };
-    const kbLookup: CreateAgentRequestAgentsInner = {
+    const kbLookup: UpsertAgentRequestAgentsInner = {
         id: KB_LOOKUP_ID,
         name: 'KBLookup',
         description: 'Finds relevant KB articles',
@@ -188,12 +193,12 @@ async function main() {
             }
         ],
         edges: [
-            { targetAgentId: DRAFT_RESPONDER_ID, conditions: [], priority: 1 }
+            {targetAgentId: DRAFT_RESPONDER_ID, conditions: [], priority: 1}
         ],
         examples: ['Lookup articles about upload errors'],
         tags: ['kb', 'support']
     };
-    const ticketSearch: CreateAgentRequestAgentsInner = {
+    const ticketSearch: UpsertAgentRequestAgentsInner = {
         id: TICKET_SEARCH_ID,
         name: 'TicketSearch',
         description: 'Looks up past resolved tickets',
@@ -209,12 +214,12 @@ async function main() {
             }
         ],
         edges: [
-            { targetAgentId: DRAFT_RESPONDER_ID, conditions: [], priority: 1 }
+            {targetAgentId: DRAFT_RESPONDER_ID, conditions: [], priority: 1}
         ],
         examples: ['Search tickets with similar error'],
         tags: ['tickets', 'support']
     };
-    const draftResponder: CreateAgentRequestAgentsInner = {
+    const draftResponder: UpsertAgentRequestAgentsInner = {
         id: DRAFT_RESPONDER_ID,
         name: 'DraftResponder',
         description: 'Drafts a support reply',
@@ -230,12 +235,12 @@ async function main() {
             }
         ],
         edges: [
-            { targetAgentId: QUALITY_CHECKER_ID, conditions: [], priority: 1 }
+            {targetAgentId: QUALITY_CHECKER_ID, conditions: [], priority: 1}
         ],
         examples: ['Draft apology and link to article'],
         tags: ['draft', 'support']
     };
-    const qualityChecker: CreateAgentRequestAgentsInner = {
+    const qualityChecker: UpsertAgentRequestAgentsInner = {
         id: QUALITY_CHECKER_ID,
         name: 'QualityChecker',
         description: 'Reviews and refines drafts',
@@ -263,33 +268,44 @@ async function main() {
             }
         ],
         edges: [
-            { targetAgentId: DRAFT_RESPONDER_ID, conditions: [2], priority: 1 }
+            {targetAgentId: DRAFT_RESPONDER_ID, conditions: [2], priority: 1}
         ],
         examples: ['Ensure tone and compliance'],
         tags: ['quality', 'review']
     };
 
     const agents = [inboxScanner, kbLookup, ticketSearch, draftResponder, qualityChecker];
-    await api.agentPut({agents});
+    const upsertAgents: UpsertAgentRequest = {agents};
+    await api.tenantsTenantIdAgentsPut(tenantId, upsertAgents);
     console.log('✅ Agents registered');
 
     // ───────────────────────────────────────────────────────────────────────────────
     // 5️⃣ Start a conversation and trigger a workflow to process a support email.
     // ───────────────────────────────────────────────────────────────────────────────
-    const {body: conv} = await api.conversationPost({tenantId,});
+    const convReq: CreateConversationUnderTenantRequest = {};
+    const {body: conv}: { body: CreateConversationResponse } =
+        await api.tenantsTenantIdConversationsPost(tenantId, convReq);
     console.log('✅ Conversation started:', conv.conversationId);
 
-    const wfReq: CreateWorkflowRequest = {
+    const wfReq = {
         tenantId,
         conversationId: conv.conversationId,
         agentId: undefined,
         input: 'Support email: Customer reports error 500 when uploading a file.',
         freeform: false
     };
-    const {body: wfResp} = await api.workflowPost(wfReq);
+    const wfReq2: CreateWorkflowUnderTenantRequest = {
+        conversationId: conv.conversationId,
+        agentId: undefined,
+        input: wfReq.input,
+        freeform: wfReq.freeform
+    };
+    const {body: wfResp}: { body: CreateWorkflowResponse } =
+        await api.tenantsTenantIdWorkflowsPost(tenantId, wfReq2);
     console.log('✅ Workflow created:', wfResp.workflowId);
 
-    const {body: wfEvents}: { body: GetWorkflowResponse } = await api.workflowIdGet(wfResp.workflowId);
+    const {body: wfEvents}: { body: GetWorkflowResponse } =
+        await api.workflowsIdGet(wfResp.workflowId);
     console.log('📜 Workflow events:', wfEvents.events);
 }
 
