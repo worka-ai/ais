@@ -9,6 +9,9 @@ jobs:
   publish:
     name: Publish package
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: clients/node
 
     steps:
       - name: Checkout repository
