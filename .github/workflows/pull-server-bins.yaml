@@ -27,6 +27,7 @@ jobs:
             });
             core.setOutput('tag', release.data.tag_name);
             core.setOutput('assets', JSON.stringify(release.data.assets));
+            core.setOutput('body', release.data.body || '');
 
       - name: Download private release assets
         env:
@@ -46,28 +47,21 @@ jobs:
                  -o "server-bins/$ASSET_NAME"
           done
 
-      - name: Create or update public release
-        id: create_public_release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ steps.get_private_release.outputs.tag }}
-          release_name: ${{ steps.get_private_release.outputs.tag }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Authenticate with GitHub CLI
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
-      - name: Upload binaries to public release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create or update public release with assets
         run: |
-          UPLOAD_URL="${{ steps.create_public_release.outputs.upload_url }}"
-          for filepath in server-bins/*; do
-            filename=$(basename "$filepath")
-            echo "Uploading $filename..."
-            curl --fail -X POST \
-              -H "Authorization: token $GITHUB_TOKEN" \
-              -H "Content-Type: application/octet-stream" \
-              --data-binary @"$filepath" \
-              "${UPLOAD_URL}?name=${filename}"
-          done
+          TAG=${{ steps.get_private_release.outputs.tag }}
+          REPO=${{ github.repository }}
+          # Write multi-line notes to a file to preserve formatting
+          printf '%s\n' "${{ steps.get_private_release.outputs.body }}" > release_notes.md
+
+          if gh release view "$TAG" --repo "$REPO"; then
+            # Update assets and notes on existing release
+            gh release upload "$TAG" server-bins/* --clobber --repo "$REPO"
+            gh release edit "$TAG" --notes-file release_notes.md --repo "$REPO"
+          else
+            # Create a new release with assets and notes
+            gh release create "$TAG" server-bins/* --notes-file release_notes.md --repo "$REPO"
+          fi
