@@ -1,10 +1,9 @@
 {
-    "name": "worka",
-    "version": "",
+    "name": "@worka-ai/worka",
     "description": "NodeJS client for worka",
     "repository": {
         "type": "git",
-        "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+        "url": "git+https://github.com/worka-ai/ais.git"
     },
     "main": "dist/api.js",
     "types": "dist/api.d.ts",
@@ -13,8 +12,8 @@
         "build": "tsc",
         "test": "npm run build && node dist/client.js"
     },
-    "author": "OpenAPI-Generator Contributors",
-    "license": "Unlicense",
+    "author": "Worka",
+    "license": "MIT",
     "dependencies": {
         "bluebird": "^3.7.2",
         "request": "^2.88.2"
@@ -24,5 +23,16 @@
         "@types/node": "^12",
         "@types/request": "^2.48.8",
         "typescript": "^4.0 || ^5.0"
-    }
+    },
+    "version": "0.0.1",
+    "keywords": [
+        "ai",
+        "worka",
+        "llm",
+        "orchestration"
+    ],
+    "bugs": {
+        "url": "https://github.com/worka-ai/ais/issues"
+    },
+    "homepage": "https://worka.ai/dev.html"
 }

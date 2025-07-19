@@ -29,7 +29,6 @@ jobs:
             core.setOutput('assets', JSON.stringify(release.data.assets));
             core.setOutput('body', release.data.body || '');
 
-
       - name: Download private release assets via GitHub CLI
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
