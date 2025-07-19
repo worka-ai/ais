@@ -29,23 +29,14 @@ jobs:
             core.setOutput('assets', JSON.stringify(release.data.assets));
             core.setOutput('body', release.data.body || '');
 
-      - name: Download private release assets
+
+      - name: Download private release assets via GitHub CLI
         env:
-          PRIVATE_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
           TAG=${{ steps.get_private_release.outputs.tag }}
-          ASSETS_JSON='${{ steps.get_private_release.outputs.assets }}'
           mkdir -p server-bins
-          echo "$ASSETS_JSON" | jq -r '.[] | @base64' | while read asset; do
-            _jq() { echo "$asset" | base64 --decode | jq -r "$1"; }
-            ASSET_ID=$(_jq '.id')
-            ASSET_NAME=$(_jq '.name')
-            echo "Downloading $ASSET_NAME from private repo..."
-            curl -L -H "Authorization: token $PRIVATE_TOKEN" \
-                 -H "Accept: application/octet-stream" \
-                 "https://api.github.com/repos/private-owner/private-repo/releases/assets/$ASSET_ID" \
-                 -o "server-bins/$ASSET_NAME"
-          done
+          gh release download "$TAG" --repo worka-ai/worka --dir server-bins
 
       - name: Authenticate with GitHub CLI
         run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
