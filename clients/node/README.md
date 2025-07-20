@@ -101,13 +101,7 @@ main().catch(console.error);
 
 Worka is powered by two standalone binaries:
 
-- **API Server** (`worka-server`): serves tenant configs, conversations, workflows, and events.
-- **Worker** (`worka-worker`): polls the API for tasks (LLM calls, tool execution, routing) and executes them.
+- **API Server** (`api`): serves tenant configs, conversations, workflows, and events.
+- **Worker** (`worker`): processes tasks (LLM calls, tool execution, routing) and executes them.
 
 Download pre-built releases for your platform: https://github.com/worka-ai/ais/releases
-
-## Documentation & Community
-
-- Full docs: https://docs.worka.ai
-- Community chat: https://discord.gg/worka
-- Launching on Product Hunt soon—stay tuned!
