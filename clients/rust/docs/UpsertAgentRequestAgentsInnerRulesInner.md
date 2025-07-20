@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**content** | **String** |  | 
-**description** | **String** |  | 
-**id** | **i64** |  | 
-**name** | **String** |  | 
-**position** | **i64** |  | 
-**rule_created_at** | **String** |  | 
+**content** | Option<**String**> |  | [optional]
+**description** | Option<**String**> |  | [optional]
+**id** | Option<**i64**> |  | [optional]
+**name** | Option<**String**> |  | [optional]
+**position** | Option<**i64**> |  | [optional]
+**rule_created_at** | Option<**String**> |  | [optional]
 **tags** | Option<**Vec<String>**> |  | [optional]
-**tenant_id** | **i64** |  | 
+**tenant_id** | Option<**i64**> |  | [optional]
 **tools** | Option<[**Vec<models::UpsertAgentRequestAgentsInnerRulesInnerToolsInner>**](UpsertAgentRequest_agents_inner_rules_inner_tools_inner.md)> |  | [optional]
-**version_created_at** | **String** |  | 
-**version_id** | **i64** |  | 
+**version_created_at** | Option<**String**> |  | [optional]
+**version_id** | Option<**i64**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

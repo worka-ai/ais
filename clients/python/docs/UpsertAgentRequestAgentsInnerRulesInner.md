@@ -5,17 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**content** | **str** |  | 
-**description** | **str** |  | 
-**id** | **int** |  | 
-**name** | **str** |  | 
-**position** | **int** |  | 
-**rule_created_at** | **datetime** |  | 
+**content** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
+**id** | **int** |  | [optional] 
+**name** | **str** |  | [optional] 
+**position** | **int** |  | [optional] 
+**rule_created_at** | **datetime** |  | [optional] 
 **tags** | **List[str]** |  | [optional] 
-**tenant_id** | **int** |  | 
+**tenant_id** | **int** |  | [optional] 
 **tools** | [**List[UpsertAgentRequestAgentsInnerRulesInnerToolsInner]**](UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md) |  | [optional] 
-**version_created_at** | **datetime** |  | 
-**version_id** | **int** |  | 
+**version_created_at** | **datetime** |  | [optional] 
+**version_id** | **int** |  | [optional] 
 
 ## Example
 

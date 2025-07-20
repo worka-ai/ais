@@ -13,12 +13,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpsertAgentRequestAgentsInnerEdgesInner {
-    /// 0 or more conditions under which the source agent can invoke the associated [target] [Agent] If empty, the target can be invoked under any circumstances
-    #[serde(rename = "conditions")]
-    pub conditions: Vec<i64>,
+    /// These are rule IDs that act as conditions to prevent an agent being called unless all the conditions in this list are true.  0 or more conditions under which the source agent can invoke the associated [target] [Agent] If empty, the target can be invoked under any circumstances
+    #[serde(rename = "conditions", skip_serializing_if = "Option::is_none")]
+    pub conditions: Option<Vec<i64>>,
     /// If two edges could be invoked and both are not required then the highest priority one should be executed
-    #[serde(rename = "priority")]
-    pub priority: i32,
+    #[serde(rename = "priority", skip_serializing_if = "Option::is_none")]
+    pub priority: Option<i32>,
     /// A JavaScript condition which must evaluate to true for the agent to be executed
     #[serde(rename = "script_condition", skip_serializing_if = "Option::is_none")]
     pub script_condition: Option<String>,
@@ -28,10 +28,10 @@ pub struct UpsertAgentRequestAgentsInnerEdgesInner {
 }
 
 impl UpsertAgentRequestAgentsInnerEdgesInner {
-    pub fn new(conditions: Vec<i64>, priority: i32, target_agent_id: i64) -> UpsertAgentRequestAgentsInnerEdgesInner {
+    pub fn new(target_agent_id: i64) -> UpsertAgentRequestAgentsInnerEdgesInner {
         UpsertAgentRequestAgentsInnerEdgesInner {
-            conditions,
-            priority,
+            conditions: None,
+            priority: None,
             script_condition: None,
             target_agent_id,
         }

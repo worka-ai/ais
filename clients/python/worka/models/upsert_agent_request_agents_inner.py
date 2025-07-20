@@ -30,9 +30,9 @@ class UpsertAgentRequestAgentsInner(BaseModel):
     """
     UpsertAgentRequestAgentsInner
     """ # noqa: E501
-    created_at: datetime
+    created_at: Optional[datetime] = None
     description: StrictStr
-    edges: List[UpsertAgentRequestAgentsInnerEdgesInner]
+    edges: Optional[List[UpsertAgentRequestAgentsInnerEdgesInner]] = None
     examples: Optional[List[StrictStr]] = None
     expected_input: StrictStr = Field(description="The info the agent expects in its prompt")
     id: StrictInt
@@ -41,7 +41,7 @@ class UpsertAgentRequestAgentsInner(BaseModel):
     rules: List[UpsertAgentRequestAgentsInnerRulesInner]
     tags: Optional[List[StrictStr]] = None
     tenant_id: StrictInt
-    tools: List[UpsertAgentRequestAgentsInnerRulesInnerToolsInner]
+    tools: Optional[List[UpsertAgentRequestAgentsInnerRulesInnerToolsInner]] = Field(default=None, description="Tools that the agent itself has access to as opposed to those inherited from the rules")
     __properties: ClassVar[List[str]] = ["created_at", "description", "edges", "examples", "expected_input", "id", "is_default", "name", "rules", "tags", "tenant_id", "tools"]
 
     model_config = ConfigDict(

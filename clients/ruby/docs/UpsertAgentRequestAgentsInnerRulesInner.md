@@ -4,17 +4,17 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **content** | **String** |  |  |
-| **description** | **String** |  |  |
-| **id** | **Integer** |  |  |
-| **name** | **String** |  |  |
-| **position** | **Integer** |  |  |
-| **rule_created_at** | **Time** |  |  |
+| **content** | **String** |  | [optional] |
+| **description** | **String** |  | [optional] |
+| **id** | **Integer** |  | [optional] |
+| **name** | **String** |  | [optional] |
+| **position** | **Integer** |  | [optional] |
+| **rule_created_at** | **Time** |  | [optional] |
 | **tags** | **Array&lt;String&gt;** |  | [optional] |
-| **tenant_id** | **Integer** |  |  |
+| **tenant_id** | **Integer** |  | [optional] |
 | **tools** | [**Array&lt;UpsertAgentRequestAgentsInnerRulesInnerToolsInner&gt;**](UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md) |  | [optional] |
-| **version_created_at** | **Time** |  |  |
-| **version_id** | **Integer** |  |  |
+| **version_created_at** | **Time** |  | [optional] |
+| **version_id** | **Integer** |  | [optional] |
 
 ## Example
 

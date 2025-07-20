@@ -874,6 +874,8 @@ components:
       properties:
         conditions:
           description: |-
+            These are rule IDs that act as conditions to prevent an agent being called unless all the conditions in this list are true.
+
             0 or more conditions under which the source agent can invoke the associated [target] [Agent]
             If empty, the target can be invoked under any circumstances
           items:
@@ -895,8 +897,6 @@ components:
           format: int64
           type: integer
       required:
-      - conditions
-      - priority
       - target_agent_id
       type: object
     UpsertAgentRequest_agents_inner_rules_inner_tools_inner_function_declarations_inner_internal:
@@ -1086,16 +1086,6 @@ components:
         version_id:
           format: int64
           type: integer
-      required:
-      - content
-      - description
-      - id
-      - name
-      - position
-      - rule_created_at
-      - tenant_id
-      - version_created_at
-      - version_id
       type: object
     UpsertAgentRequest_agents_inner:
       example:
@@ -1334,18 +1324,17 @@ components:
           format: int64
           type: integer
         tools:
+          description: Tools that the agent itself has access to as opposed to those
+            inherited from the rules
           items:
             $ref: "#/components/schemas/UpsertAgentRequest_agents_inner_rules_inner_tools_inner"
           type: array
       required:
-      - created_at
       - description
-      - edges
       - expected_input
       - id
       - name
       - rules
       - tenant_id
-      - tools
       type: object
 

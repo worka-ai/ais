@@ -48,10 +48,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   UpsertAgentRequestAgentsInner.JSON_PROPERTY_TOOLS
 })
 @JsonTypeName("UpsertAgentRequest_agents_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-17T16:24:59.041193+01:00[Europe/London]", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-20T10:31:22.571501+01:00[Europe/London]", comments = "Generator version: 7.14.0")
 public class UpsertAgentRequestAgentsInner {
   public static final String JSON_PROPERTY_CREATED_AT = "created_at";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private OffsetDateTime createdAt;
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
@@ -59,7 +59,7 @@ public class UpsertAgentRequestAgentsInner {
   private String description;
 
   public static final String JSON_PROPERTY_EDGES = "edges";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private List<UpsertAgentRequestAgentsInnerEdgesInner> edges = new ArrayList<>();
 
   public static final String JSON_PROPERTY_EXAMPLES = "examples";
@@ -95,13 +95,13 @@ public class UpsertAgentRequestAgentsInner {
   private Long tenantId;
 
   public static final String JSON_PROPERTY_TOOLS = "tools";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private List<UpsertAgentRequestAgentsInnerRulesInnerToolsInner> tools = new ArrayList<>();
 
   public UpsertAgentRequestAgentsInner() {
   }
 
-  public UpsertAgentRequestAgentsInner createdAt(@javax.annotation.Nonnull OffsetDateTime createdAt) {
+  public UpsertAgentRequestAgentsInner createdAt(@javax.annotation.Nullable OffsetDateTime createdAt) {
     
     this.createdAt = createdAt;
     return this;
@@ -111,9 +111,9 @@ public class UpsertAgentRequestAgentsInner {
    * Get createdAt
    * @return createdAt
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getCreatedAt() {
     return createdAt;
@@ -121,8 +121,8 @@ public class UpsertAgentRequestAgentsInner {
 
 
   @JsonProperty(JSON_PROPERTY_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCreatedAt(@javax.annotation.Nonnull OffsetDateTime createdAt) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCreatedAt(@javax.annotation.Nullable OffsetDateTime createdAt) {
     this.createdAt = createdAt;
   }
 
@@ -151,7 +151,7 @@ public class UpsertAgentRequestAgentsInner {
     this.description = description;
   }
 
-  public UpsertAgentRequestAgentsInner edges(@javax.annotation.Nonnull List<UpsertAgentRequestAgentsInnerEdgesInner> edges) {
+  public UpsertAgentRequestAgentsInner edges(@javax.annotation.Nullable List<UpsertAgentRequestAgentsInnerEdgesInner> edges) {
     
     this.edges = edges;
     return this;
@@ -169,9 +169,9 @@ public class UpsertAgentRequestAgentsInner {
    * Get edges
    * @return edges
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EDGES)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<UpsertAgentRequestAgentsInnerEdgesInner> getEdges() {
     return edges;
@@ -179,8 +179,8 @@ public class UpsertAgentRequestAgentsInner {
 
 
   @JsonProperty(JSON_PROPERTY_EDGES)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setEdges(@javax.annotation.Nonnull List<UpsertAgentRequestAgentsInnerEdgesInner> edges) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setEdges(@javax.annotation.Nullable List<UpsertAgentRequestAgentsInnerEdgesInner> edges) {
     this.edges = edges;
   }
 
@@ -408,7 +408,7 @@ public class UpsertAgentRequestAgentsInner {
     this.tenantId = tenantId;
   }
 
-  public UpsertAgentRequestAgentsInner tools(@javax.annotation.Nonnull List<UpsertAgentRequestAgentsInnerRulesInnerToolsInner> tools) {
+  public UpsertAgentRequestAgentsInner tools(@javax.annotation.Nullable List<UpsertAgentRequestAgentsInnerRulesInnerToolsInner> tools) {
     
     this.tools = tools;
     return this;
@@ -423,12 +423,12 @@ public class UpsertAgentRequestAgentsInner {
   }
 
   /**
-   * Get tools
+   * Tools that the agent itself has access to as opposed to those inherited from the rules
    * @return tools
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TOOLS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<UpsertAgentRequestAgentsInnerRulesInnerToolsInner> getTools() {
     return tools;
@@ -436,8 +436,8 @@ public class UpsertAgentRequestAgentsInner {
 
 
   @JsonProperty(JSON_PROPERTY_TOOLS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTools(@javax.annotation.Nonnull List<UpsertAgentRequestAgentsInnerRulesInnerToolsInner> tools) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTools(@javax.annotation.Nullable List<UpsertAgentRequestAgentsInnerRulesInnerToolsInner> tools) {
     this.tools = tools;
   }
 

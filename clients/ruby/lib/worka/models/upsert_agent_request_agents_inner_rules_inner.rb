@@ -105,38 +105,26 @@ module Worka
 
       if attributes.key?(:'content')
         self.content = attributes[:'content']
-      else
-        self.content = nil
       end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
-      else
-        self.description = nil
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'position')
         self.position = attributes[:'position']
-      else
-        self.position = nil
       end
 
       if attributes.key?(:'rule_created_at')
         self.rule_created_at = attributes[:'rule_created_at']
-      else
-        self.rule_created_at = nil
       end
 
       if attributes.key?(:'tags')
@@ -147,8 +135,6 @@ module Worka
 
       if attributes.key?(:'tenant_id')
         self.tenant_id = attributes[:'tenant_id']
-      else
-        self.tenant_id = nil
       end
 
       if attributes.key?(:'tools')
@@ -159,14 +145,10 @@ module Worka
 
       if attributes.key?(:'version_created_at')
         self.version_created_at = attributes[:'version_created_at']
-      else
-        self.version_created_at = nil
       end
 
       if attributes.key?(:'version_id')
         self.version_id = attributes[:'version_id']
-      else
-        self.version_id = nil
       end
     end
 
@@ -175,42 +157,6 @@ module Worka
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @content.nil?
-        invalid_properties.push('invalid value for "content", content cannot be nil.')
-      end
-
-      if @description.nil?
-        invalid_properties.push('invalid value for "description", description cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @position.nil?
-        invalid_properties.push('invalid value for "position", position cannot be nil.')
-      end
-
-      if @rule_created_at.nil?
-        invalid_properties.push('invalid value for "rule_created_at", rule_created_at cannot be nil.')
-      end
-
-      if @tenant_id.nil?
-        invalid_properties.push('invalid value for "tenant_id", tenant_id cannot be nil.')
-      end
-
-      if @version_created_at.nil?
-        invalid_properties.push('invalid value for "version_created_at", version_created_at cannot be nil.')
-      end
-
-      if @version_id.nil?
-        invalid_properties.push('invalid value for "version_id", version_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -218,106 +164,7 @@ module Worka
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @content.nil?
-      return false if @description.nil?
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @position.nil?
-      return false if @rule_created_at.nil?
-      return false if @tenant_id.nil?
-      return false if @version_created_at.nil?
-      return false if @version_id.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] content Value to be assigned
-    def content=(content)
-      if content.nil?
-        fail ArgumentError, 'content cannot be nil'
-      end
-
-      @content = content
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.nil?
-        fail ArgumentError, 'description cannot be nil'
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.nil?
-        fail ArgumentError, 'id cannot be nil'
-      end
-
-      @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] position Value to be assigned
-    def position=(position)
-      if position.nil?
-        fail ArgumentError, 'position cannot be nil'
-      end
-
-      @position = position
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] rule_created_at Value to be assigned
-    def rule_created_at=(rule_created_at)
-      if rule_created_at.nil?
-        fail ArgumentError, 'rule_created_at cannot be nil'
-      end
-
-      @rule_created_at = rule_created_at
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] tenant_id Value to be assigned
-    def tenant_id=(tenant_id)
-      if tenant_id.nil?
-        fail ArgumentError, 'tenant_id cannot be nil'
-      end
-
-      @tenant_id = tenant_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] version_created_at Value to be assigned
-    def version_created_at=(version_created_at)
-      if version_created_at.nil?
-        fail ArgumentError, 'version_created_at cannot be nil'
-      end
-
-      @version_created_at = version_created_at
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] version_id Value to be assigned
-    def version_id=(version_id)
-      if version_id.nil?
-        fail ArgumentError, 'version_id cannot be nil'
-      end
-
-      @version_id = version_id
     end
 
     # Checks equality by comparing each attribute.

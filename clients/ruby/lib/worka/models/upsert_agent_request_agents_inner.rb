@@ -38,6 +38,7 @@ module Worka
 
     attr_accessor :tenant_id
 
+    # Tools that the agent itself has access to as opposed to those inherited from the rules
     attr_accessor :tools
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -110,8 +111,6 @@ module Worka
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'description')
@@ -124,8 +123,6 @@ module Worka
         if (value = attributes[:'edges']).is_a?(Array)
           self.edges = value
         end
-      else
-        self.edges = nil
       end
 
       if attributes.key?(:'examples')
@@ -180,8 +177,6 @@ module Worka
         if (value = attributes[:'tools']).is_a?(Array)
           self.tools = value
         end
-      else
-        self.tools = nil
       end
     end
 
@@ -190,16 +185,8 @@ module Worka
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
       if @description.nil?
         invalid_properties.push('invalid value for "description", description cannot be nil.')
-      end
-
-      if @edges.nil?
-        invalid_properties.push('invalid value for "edges", edges cannot be nil.')
       end
 
       if @expected_input.nil?
@@ -222,10 +209,6 @@ module Worka
         invalid_properties.push('invalid value for "tenant_id", tenant_id cannot be nil.')
       end
 
-      if @tools.nil?
-        invalid_properties.push('invalid value for "tools", tools cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -233,26 +216,13 @@ module Worka
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @created_at.nil?
       return false if @description.nil?
-      return false if @edges.nil?
       return false if @expected_input.nil?
       return false if @id.nil?
       return false if @name.nil?
       return false if @rules.nil?
       return false if @tenant_id.nil?
-      return false if @tools.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] created_at Value to be assigned
-    def created_at=(created_at)
-      if created_at.nil?
-        fail ArgumentError, 'created_at cannot be nil'
-      end
-
-      @created_at = created_at
     end
 
     # Custom attribute writer method with validation
@@ -263,16 +233,6 @@ module Worka
       end
 
       @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] edges Value to be assigned
-    def edges=(edges)
-      if edges.nil?
-        fail ArgumentError, 'edges cannot be nil'
-      end
-
-      @edges = edges
     end
 
     # Custom attribute writer method with validation
@@ -323,16 +283,6 @@ module Worka
       end
 
       @tenant_id = tenant_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] tools Value to be assigned
-    def tools=(tools)
-      if tools.nil?
-        fail ArgumentError, 'tools cannot be nil'
-      end
-
-      @tools = tools
     end
 
     # Checks equality by comparing each attribute.

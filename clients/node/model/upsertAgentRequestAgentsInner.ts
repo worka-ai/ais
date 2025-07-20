@@ -16,9 +16,9 @@ import { UpsertAgentRequestAgentsInnerRulesInner } from './upsertAgentRequestAge
 import { UpsertAgentRequestAgentsInnerRulesInnerToolsInner } from './upsertAgentRequestAgentsInnerRulesInnerToolsInner';
 
 export class UpsertAgentRequestAgentsInner {
-    'createdAt': Date;
+    'createdAt'?: Date;
     'description': string;
-    'edges': Array<UpsertAgentRequestAgentsInnerEdgesInner>;
+    'edges'?: Array<UpsertAgentRequestAgentsInnerEdgesInner>;
     'examples'?: Array<string>;
     /**
     * The info the agent expects in its prompt
@@ -30,7 +30,10 @@ export class UpsertAgentRequestAgentsInner {
     'rules': Array<UpsertAgentRequestAgentsInnerRulesInner>;
     'tags'?: Array<string>;
     'tenantId': number;
-    'tools': Array<UpsertAgentRequestAgentsInnerRulesInnerToolsInner>;
+    /**
+    * Tools that the agent itself has access to as opposed to those inherited from the rules
+    */
+    'tools'?: Array<UpsertAgentRequestAgentsInnerRulesInnerToolsInner>;
 
     static discriminator: string | undefined = undefined;
 

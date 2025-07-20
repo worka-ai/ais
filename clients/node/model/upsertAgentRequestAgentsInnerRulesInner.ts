@@ -14,17 +14,17 @@ import { RequestFile } from './models';
 import { UpsertAgentRequestAgentsInnerRulesInnerToolsInner } from './upsertAgentRequestAgentsInnerRulesInnerToolsInner';
 
 export class UpsertAgentRequestAgentsInnerRulesInner {
-    'content': string;
-    'description': string;
-    'id': number;
-    'name': string;
-    'position': number;
-    'ruleCreatedAt': Date;
+    'content'?: string;
+    'description'?: string;
+    'id'?: number;
+    'name'?: string;
+    'position'?: number;
+    'ruleCreatedAt'?: Date;
     'tags'?: Array<string>;
-    'tenantId': number;
+    'tenantId'?: number;
     'tools'?: Array<UpsertAgentRequestAgentsInnerRulesInnerToolsInner>;
-    'versionCreatedAt': Date;
-    'versionId': number;
+    'versionCreatedAt'?: Date;
+    'versionId'?: number;
 
     static discriminator: string | undefined = undefined;
 

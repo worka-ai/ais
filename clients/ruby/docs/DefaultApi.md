@@ -89,7 +89,7 @@ require 'worka'
 
 api_instance = Worka::DefaultApi.new
 tenant_id = 789 # Integer | 
-upsert_agent_request = Worka::UpsertAgentRequest.new({agents: [Worka::UpsertAgentRequestAgentsInner.new({created_at: Time.now, description: 'description_example', edges: [Worka::UpsertAgentRequestAgentsInnerEdgesInner.new({conditions: [3.56], priority: 37, target_agent_id: 3.56})], expected_input: 'expected_input_example', id: 3.56, name: 'name_example', rules: [Worka::UpsertAgentRequestAgentsInnerRulesInner.new({content: 'content_example', description: 'description_example', id: 3.56, name: 'name_example', position: 3.56, rule_created_at: Time.now, tenant_id: 3.56, version_created_at: Time.now, version_id: 3.56})], tenant_id: 3.56, tools: [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInner.new({function_declarations: [Worka::UpsertAgentRequestAgentsInnerRulesInnerToolsInnerFunctionDeclarationsInner.new({description: 'description_example', name: 'name_example', parameters: 3.56})]})]})]}) # UpsertAgentRequest | 
+upsert_agent_request = Worka::UpsertAgentRequest.new({agents: [Worka::UpsertAgentRequestAgentsInner.new({description: 'description_example', expected_input: 'expected_input_example', id: 3.56, name: 'name_example', rules: [Worka::UpsertAgentRequestAgentsInnerRulesInner.new], tenant_id: 3.56})]}) # UpsertAgentRequest | 
 
 begin
   

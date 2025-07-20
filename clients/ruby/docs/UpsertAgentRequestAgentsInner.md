@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **created_at** | **Time** |  |  |
+| **created_at** | **Time** |  | [optional] |
 | **description** | **String** |  |  |
-| **edges** | [**Array&lt;UpsertAgentRequestAgentsInnerEdgesInner&gt;**](UpsertAgentRequestAgentsInnerEdgesInner.md) |  |  |
+| **edges** | [**Array&lt;UpsertAgentRequestAgentsInnerEdgesInner&gt;**](UpsertAgentRequestAgentsInnerEdgesInner.md) |  | [optional] |
 | **examples** | **Array&lt;String&gt;** |  | [optional] |
 | **expected_input** | **String** | The info the agent expects in its prompt |  |
 | **id** | **Integer** |  |  |
@@ -15,7 +15,7 @@
 | **rules** | [**Array&lt;UpsertAgentRequestAgentsInnerRulesInner&gt;**](UpsertAgentRequestAgentsInnerRulesInner.md) |  |  |
 | **tags** | **Array&lt;String&gt;** |  | [optional] |
 | **tenant_id** | **Integer** |  |  |
-| **tools** | [**Array&lt;UpsertAgentRequestAgentsInnerRulesInnerToolsInner&gt;**](UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md) |  |  |
+| **tools** | [**Array&lt;UpsertAgentRequestAgentsInnerRulesInnerToolsInner&gt;**](UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md) | Tools that the agent itself has access to as opposed to those inherited from the rules | [optional] |
 
 ## Example
 

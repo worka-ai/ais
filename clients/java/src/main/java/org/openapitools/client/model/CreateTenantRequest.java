@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   CreateTenantRequest.JSON_PROPERTY_TENANT_ID,
   CreateTenantRequest.JSON_PROPERTY_USERNAME
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-17T16:24:59.041193+01:00[Europe/London]", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-20T10:31:22.571501+01:00[Europe/London]", comments = "Generator version: 7.14.0")
 public class CreateTenantRequest {
   public static final String JSON_PROPERTY_DETERMINE_CONVERSATION_WITH_AGENT = "determine_conversation_with_agent";
   @javax.annotation.Nonnull

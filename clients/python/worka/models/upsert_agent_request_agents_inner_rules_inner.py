@@ -28,17 +28,17 @@ class UpsertAgentRequestAgentsInnerRulesInner(BaseModel):
     """
     UpsertAgentRequestAgentsInnerRulesInner
     """ # noqa: E501
-    content: StrictStr
-    description: StrictStr
-    id: StrictInt
-    name: StrictStr
-    position: StrictInt
-    rule_created_at: datetime
+    content: Optional[StrictStr] = None
+    description: Optional[StrictStr] = None
+    id: Optional[StrictInt] = None
+    name: Optional[StrictStr] = None
+    position: Optional[StrictInt] = None
+    rule_created_at: Optional[datetime] = None
     tags: Optional[List[StrictStr]] = None
-    tenant_id: StrictInt
+    tenant_id: Optional[StrictInt] = None
     tools: Optional[List[UpsertAgentRequestAgentsInnerRulesInnerToolsInner]] = None
-    version_created_at: datetime
-    version_id: StrictInt
+    version_created_at: Optional[datetime] = None
+    version_id: Optional[StrictInt] = None
     __properties: ClassVar[List[str]] = ["content", "description", "id", "name", "position", "rule_created_at", "tags", "tenant_id", "tools", "version_created_at", "version_id"]
 
     model_config = ConfigDict(

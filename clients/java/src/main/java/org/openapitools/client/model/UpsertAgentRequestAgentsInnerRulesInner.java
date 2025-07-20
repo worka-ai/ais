@@ -45,30 +45,30 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   UpsertAgentRequestAgentsInnerRulesInner.JSON_PROPERTY_VERSION_ID
 })
 @JsonTypeName("UpsertAgentRequest_agents_inner_rules_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-17T16:24:59.041193+01:00[Europe/London]", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-20T10:31:22.571501+01:00[Europe/London]", comments = "Generator version: 7.14.0")
 public class UpsertAgentRequestAgentsInnerRulesInner {
   public static final String JSON_PROPERTY_CONTENT = "content";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String content;
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String description;
 
   public static final String JSON_PROPERTY_ID = "id";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Long id;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String name;
 
   public static final String JSON_PROPERTY_POSITION = "position";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Long position;
 
   public static final String JSON_PROPERTY_RULE_CREATED_AT = "rule_created_at";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private OffsetDateTime ruleCreatedAt;
 
   public static final String JSON_PROPERTY_TAGS = "tags";
@@ -76,7 +76,7 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
   private List<String> tags = new ArrayList<>();
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenant_id";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Long tenantId;
 
   public static final String JSON_PROPERTY_TOOLS = "tools";
@@ -84,17 +84,17 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
   private List<UpsertAgentRequestAgentsInnerRulesInnerToolsInner> tools = new ArrayList<>();
 
   public static final String JSON_PROPERTY_VERSION_CREATED_AT = "version_created_at";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private OffsetDateTime versionCreatedAt;
 
   public static final String JSON_PROPERTY_VERSION_ID = "version_id";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Long versionId;
 
   public UpsertAgentRequestAgentsInnerRulesInner() {
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner content(@javax.annotation.Nonnull String content) {
+  public UpsertAgentRequestAgentsInnerRulesInner content(@javax.annotation.Nullable String content) {
     
     this.content = content;
     return this;
@@ -104,9 +104,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get content
    * @return content
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTENT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getContent() {
     return content;
@@ -114,12 +114,12 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_CONTENT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setContent(@javax.annotation.Nonnull String content) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setContent(@javax.annotation.Nullable String content) {
     this.content = content;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner description(@javax.annotation.Nonnull String description) {
+  public UpsertAgentRequestAgentsInnerRulesInner description(@javax.annotation.Nullable String description) {
     
     this.description = description;
     return this;
@@ -129,9 +129,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get description
    * @return description
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDescription() {
     return description;
@@ -139,12 +139,12 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setDescription(@javax.annotation.Nonnull String description) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner id(@javax.annotation.Nonnull Long id) {
+  public UpsertAgentRequestAgentsInnerRulesInner id(@javax.annotation.Nullable Long id) {
     
     this.id = id;
     return this;
@@ -154,9 +154,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get id
    * @return id
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getId() {
     return id;
@@ -164,12 +164,12 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setId(@javax.annotation.Nonnull Long id) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setId(@javax.annotation.Nullable Long id) {
     this.id = id;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner name(@javax.annotation.Nonnull String name) {
+  public UpsertAgentRequestAgentsInnerRulesInner name(@javax.annotation.Nullable String name) {
     
     this.name = name;
     return this;
@@ -179,9 +179,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get name
    * @return name
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -189,12 +189,12 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setName(@javax.annotation.Nonnull String name) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner position(@javax.annotation.Nonnull Long position) {
+  public UpsertAgentRequestAgentsInnerRulesInner position(@javax.annotation.Nullable Long position) {
     
     this.position = position;
     return this;
@@ -204,9 +204,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get position
    * @return position
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_POSITION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getPosition() {
     return position;
@@ -214,12 +214,12 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_POSITION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPosition(@javax.annotation.Nonnull Long position) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPosition(@javax.annotation.Nullable Long position) {
     this.position = position;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner ruleCreatedAt(@javax.annotation.Nonnull OffsetDateTime ruleCreatedAt) {
+  public UpsertAgentRequestAgentsInnerRulesInner ruleCreatedAt(@javax.annotation.Nullable OffsetDateTime ruleCreatedAt) {
     
     this.ruleCreatedAt = ruleCreatedAt;
     return this;
@@ -229,9 +229,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get ruleCreatedAt
    * @return ruleCreatedAt
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RULE_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getRuleCreatedAt() {
     return ruleCreatedAt;
@@ -239,8 +239,8 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_RULE_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setRuleCreatedAt(@javax.annotation.Nonnull OffsetDateTime ruleCreatedAt) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRuleCreatedAt(@javax.annotation.Nullable OffsetDateTime ruleCreatedAt) {
     this.ruleCreatedAt = ruleCreatedAt;
   }
 
@@ -277,7 +277,7 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
     this.tags = tags;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner tenantId(@javax.annotation.Nonnull Long tenantId) {
+  public UpsertAgentRequestAgentsInnerRulesInner tenantId(@javax.annotation.Nullable Long tenantId) {
     
     this.tenantId = tenantId;
     return this;
@@ -287,9 +287,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get tenantId
    * @return tenantId
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getTenantId() {
     return tenantId;
@@ -297,8 +297,8 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTenantId(@javax.annotation.Nonnull Long tenantId) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTenantId(@javax.annotation.Nullable Long tenantId) {
     this.tenantId = tenantId;
   }
 
@@ -335,7 +335,7 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
     this.tools = tools;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner versionCreatedAt(@javax.annotation.Nonnull OffsetDateTime versionCreatedAt) {
+  public UpsertAgentRequestAgentsInnerRulesInner versionCreatedAt(@javax.annotation.Nullable OffsetDateTime versionCreatedAt) {
     
     this.versionCreatedAt = versionCreatedAt;
     return this;
@@ -345,9 +345,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get versionCreatedAt
    * @return versionCreatedAt
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_VERSION_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getVersionCreatedAt() {
     return versionCreatedAt;
@@ -355,12 +355,12 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_VERSION_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setVersionCreatedAt(@javax.annotation.Nonnull OffsetDateTime versionCreatedAt) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setVersionCreatedAt(@javax.annotation.Nullable OffsetDateTime versionCreatedAt) {
     this.versionCreatedAt = versionCreatedAt;
   }
 
-  public UpsertAgentRequestAgentsInnerRulesInner versionId(@javax.annotation.Nonnull Long versionId) {
+  public UpsertAgentRequestAgentsInnerRulesInner versionId(@javax.annotation.Nullable Long versionId) {
     
     this.versionId = versionId;
     return this;
@@ -370,9 +370,9 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
    * Get versionId
    * @return versionId
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_VERSION_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getVersionId() {
     return versionId;
@@ -380,8 +380,8 @@ public class UpsertAgentRequestAgentsInnerRulesInner {
 
 
   @JsonProperty(JSON_PROPERTY_VERSION_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setVersionId(@javax.annotation.Nonnull Long versionId) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setVersionId(@javax.annotation.Nullable Long versionId) {
     this.versionId = versionId;
   }
 

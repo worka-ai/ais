@@ -36,14 +36,14 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   UpsertAgentRequestAgentsInnerEdgesInner.JSON_PROPERTY_TARGET_AGENT_ID
 })
 @JsonTypeName("UpsertAgentRequest_agents_inner_edges_inner")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-17T16:24:59.041193+01:00[Europe/London]", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-07-20T10:31:22.571501+01:00[Europe/London]", comments = "Generator version: 7.14.0")
 public class UpsertAgentRequestAgentsInnerEdgesInner {
   public static final String JSON_PROPERTY_CONDITIONS = "conditions";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private List<Long> conditions = new ArrayList<>();
 
   public static final String JSON_PROPERTY_PRIORITY = "priority";
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private Integer priority;
 
   public static final String JSON_PROPERTY_SCRIPT_CONDITION = "script_condition";
@@ -57,7 +57,7 @@ public class UpsertAgentRequestAgentsInnerEdgesInner {
   public UpsertAgentRequestAgentsInnerEdgesInner() {
   }
 
-  public UpsertAgentRequestAgentsInnerEdgesInner conditions(@javax.annotation.Nonnull List<Long> conditions) {
+  public UpsertAgentRequestAgentsInnerEdgesInner conditions(@javax.annotation.Nullable List<Long> conditions) {
     
     this.conditions = conditions;
     return this;
@@ -72,12 +72,12 @@ public class UpsertAgentRequestAgentsInnerEdgesInner {
   }
 
   /**
-   * 0 or more conditions under which the source agent can invoke the associated [target] [Agent] If empty, the target can be invoked under any circumstances
+   * These are rule IDs that act as conditions to prevent an agent being called unless all the conditions in this list are true.  0 or more conditions under which the source agent can invoke the associated [target] [Agent] If empty, the target can be invoked under any circumstances
    * @return conditions
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONDITIONS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<Long> getConditions() {
     return conditions;
@@ -85,12 +85,12 @@ public class UpsertAgentRequestAgentsInnerEdgesInner {
 
 
   @JsonProperty(JSON_PROPERTY_CONDITIONS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setConditions(@javax.annotation.Nonnull List<Long> conditions) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setConditions(@javax.annotation.Nullable List<Long> conditions) {
     this.conditions = conditions;
   }
 
-  public UpsertAgentRequestAgentsInnerEdgesInner priority(@javax.annotation.Nonnull Integer priority) {
+  public UpsertAgentRequestAgentsInnerEdgesInner priority(@javax.annotation.Nullable Integer priority) {
     
     this.priority = priority;
     return this;
@@ -100,9 +100,9 @@ public class UpsertAgentRequestAgentsInnerEdgesInner {
    * If two edges could be invoked and both are not required then the highest priority one should be executed
    * @return priority
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRIORITY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getPriority() {
     return priority;
@@ -110,8 +110,8 @@ public class UpsertAgentRequestAgentsInnerEdgesInner {
 
 
   @JsonProperty(JSON_PROPERTY_PRIORITY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPriority(@javax.annotation.Nonnull Integer priority) {
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPriority(@javax.annotation.Nullable Integer priority) {
     this.priority = priority;
   }
 

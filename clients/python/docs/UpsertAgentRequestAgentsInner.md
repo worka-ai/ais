@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at** | **datetime** |  | 
+**created_at** | **datetime** |  | [optional] 
 **description** | **str** |  | 
-**edges** | [**List[UpsertAgentRequestAgentsInnerEdgesInner]**](UpsertAgentRequestAgentsInnerEdgesInner.md) |  | 
+**edges** | [**List[UpsertAgentRequestAgentsInnerEdgesInner]**](UpsertAgentRequestAgentsInnerEdgesInner.md) |  | [optional] 
 **examples** | **List[str]** |  | [optional] 
 **expected_input** | **str** | The info the agent expects in its prompt | 
 **id** | **int** |  | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **rules** | [**List[UpsertAgentRequestAgentsInnerRulesInner]**](UpsertAgentRequestAgentsInnerRulesInner.md) |  | 
 **tags** | **List[str]** |  | [optional] 
 **tenant_id** | **int** |  | 
-**tools** | [**List[UpsertAgentRequestAgentsInnerRulesInnerToolsInner]**](UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md) |  | 
+**tools** | [**List[UpsertAgentRequestAgentsInnerRulesInnerToolsInner]**](UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md) | Tools that the agent itself has access to as opposed to those inherited from the rules | [optional] 
 
 ## Example
 

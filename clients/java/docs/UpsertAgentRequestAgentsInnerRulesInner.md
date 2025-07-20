@@ -7,17 +7,17 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**content** | **String** |  |  |
-|**description** | **String** |  |  |
-|**id** | **Long** |  |  |
-|**name** | **String** |  |  |
-|**position** | **Long** |  |  |
-|**ruleCreatedAt** | **OffsetDateTime** |  |  |
+|**content** | **String** |  |  [optional] |
+|**description** | **String** |  |  [optional] |
+|**id** | **Long** |  |  [optional] |
+|**name** | **String** |  |  [optional] |
+|**position** | **Long** |  |  [optional] |
+|**ruleCreatedAt** | **OffsetDateTime** |  |  [optional] |
 |**tags** | **List&lt;String&gt;** |  |  [optional] |
-|**tenantId** | **Long** |  |  |
+|**tenantId** | **Long** |  |  [optional] |
 |**tools** | [**List&lt;UpsertAgentRequestAgentsInnerRulesInnerToolsInner&gt;**](UpsertAgentRequestAgentsInnerRulesInnerToolsInner.md) |  |  [optional] |
-|**versionCreatedAt** | **OffsetDateTime** |  |  |
-|**versionId** | **Long** |  |  |
+|**versionCreatedAt** | **OffsetDateTime** |  |  [optional] |
+|**versionId** | **Long** |  |  [optional] |
 
 
 

@@ -13,44 +13,44 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpsertAgentRequestAgentsInnerRulesInner {
-    #[serde(rename = "content")]
-    pub content: String,
-    #[serde(rename = "description")]
-    pub description: String,
-    #[serde(rename = "id")]
-    pub id: i64,
-    #[serde(rename = "name")]
-    pub name: String,
-    #[serde(rename = "position")]
-    pub position: i64,
-    #[serde(rename = "rule_created_at")]
-    pub rule_created_at: String,
+    #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
+    pub content: Option<String>,
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<i64>,
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(rename = "position", skip_serializing_if = "Option::is_none")]
+    pub position: Option<i64>,
+    #[serde(rename = "rule_created_at", skip_serializing_if = "Option::is_none")]
+    pub rule_created_at: Option<String>,
     #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
     pub tags: Option<Vec<String>>,
-    #[serde(rename = "tenant_id")]
-    pub tenant_id: i64,
+    #[serde(rename = "tenant_id", skip_serializing_if = "Option::is_none")]
+    pub tenant_id: Option<i64>,
     #[serde(rename = "tools", skip_serializing_if = "Option::is_none")]
     pub tools: Option<Vec<models::UpsertAgentRequestAgentsInnerRulesInnerToolsInner>>,
-    #[serde(rename = "version_created_at")]
-    pub version_created_at: String,
-    #[serde(rename = "version_id")]
-    pub version_id: i64,
+    #[serde(rename = "version_created_at", skip_serializing_if = "Option::is_none")]
+    pub version_created_at: Option<String>,
+    #[serde(rename = "version_id", skip_serializing_if = "Option::is_none")]
+    pub version_id: Option<i64>,
 }
 
 impl UpsertAgentRequestAgentsInnerRulesInner {
-    pub fn new(content: String, description: String, id: i64, name: String, position: i64, rule_created_at: String, tenant_id: i64, version_created_at: String, version_id: i64) -> UpsertAgentRequestAgentsInnerRulesInner {
+    pub fn new() -> UpsertAgentRequestAgentsInnerRulesInner {
         UpsertAgentRequestAgentsInnerRulesInner {
-            content,
-            description,
-            id,
-            name,
-            position,
-            rule_created_at,
+            content: None,
+            description: None,
+            id: None,
+            name: None,
+            position: None,
+            rule_created_at: None,
             tags: None,
-            tenant_id,
+            tenant_id: None,
             tools: None,
-            version_created_at,
-            version_id,
+            version_created_at: None,
+            version_id: None,
         }
     }
 }

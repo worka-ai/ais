@@ -13,12 +13,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct UpsertAgentRequestAgentsInner {
-    #[serde(rename = "created_at")]
-    pub created_at: String,
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
     #[serde(rename = "description")]
     pub description: String,
-    #[serde(rename = "edges")]
-    pub edges: Vec<models::UpsertAgentRequestAgentsInnerEdgesInner>,
+    #[serde(rename = "edges", skip_serializing_if = "Option::is_none")]
+    pub edges: Option<Vec<models::UpsertAgentRequestAgentsInnerEdgesInner>>,
     #[serde(rename = "examples", skip_serializing_if = "Option::is_none")]
     pub examples: Option<Vec<String>>,
     /// The info the agent expects in its prompt
@@ -36,16 +36,17 @@ pub struct UpsertAgentRequestAgentsInner {
     pub tags: Option<Vec<String>>,
     #[serde(rename = "tenant_id")]
     pub tenant_id: i64,
-    #[serde(rename = "tools")]
-    pub tools: Vec<models::UpsertAgentRequestAgentsInnerRulesInnerToolsInner>,
+    /// Tools that the agent itself has access to as opposed to those inherited from the rules
+    #[serde(rename = "tools", skip_serializing_if = "Option::is_none")]
+    pub tools: Option<Vec<models::UpsertAgentRequestAgentsInnerRulesInnerToolsInner>>,
 }
 
 impl UpsertAgentRequestAgentsInner {
-    pub fn new(created_at: String, description: String, edges: Vec<models::UpsertAgentRequestAgentsInnerEdgesInner>, expected_input: String, id: i64, name: String, rules: Vec<models::UpsertAgentRequestAgentsInnerRulesInner>, tenant_id: i64, tools: Vec<models::UpsertAgentRequestAgentsInnerRulesInnerToolsInner>) -> UpsertAgentRequestAgentsInner {
+    pub fn new(description: String, expected_input: String, id: i64, name: String, rules: Vec<models::UpsertAgentRequestAgentsInnerRulesInner>, tenant_id: i64) -> UpsertAgentRequestAgentsInner {
         UpsertAgentRequestAgentsInner {
-            created_at,
+            created_at: None,
             description,
-            edges,
+            edges: None,
             examples: None,
             expected_input,
             id,
@@ -54,7 +55,7 @@ impl UpsertAgentRequestAgentsInner {
             rules,
             tags: None,
             tenant_id,
-            tools,
+            tools: None,
         }
     }
 }

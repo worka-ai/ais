@@ -15,7 +15,7 @@ require 'time'
 
 module Worka
   class UpsertAgentRequestAgentsInnerEdgesInner
-    # 0 or more conditions under which the source agent can invoke the associated [target] [Agent] If empty, the target can be invoked under any circumstances
+    # These are rule IDs that act as conditions to prevent an agent being called unless all the conditions in this list are true.  0 or more conditions under which the source agent can invoke the associated [target] [Agent] If empty, the target can be invoked under any circumstances
     attr_accessor :conditions
 
     # If two edges could be invoked and both are not required then the highest priority one should be executed
@@ -83,14 +83,10 @@ module Worka
         if (value = attributes[:'conditions']).is_a?(Array)
           self.conditions = value
         end
-      else
-        self.conditions = nil
       end
 
       if attributes.key?(:'priority')
         self.priority = attributes[:'priority']
-      else
-        self.priority = nil
       end
 
       if attributes.key?(:'script_condition')
@@ -109,14 +105,6 @@ module Worka
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @conditions.nil?
-        invalid_properties.push('invalid value for "conditions", conditions cannot be nil.')
-      end
-
-      if @priority.nil?
-        invalid_properties.push('invalid value for "priority", priority cannot be nil.')
-      end
-
       if @target_agent_id.nil?
         invalid_properties.push('invalid value for "target_agent_id", target_agent_id cannot be nil.')
       end
@@ -128,30 +116,8 @@ module Worka
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @conditions.nil?
-      return false if @priority.nil?
       return false if @target_agent_id.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] conditions Value to be assigned
-    def conditions=(conditions)
-      if conditions.nil?
-        fail ArgumentError, 'conditions cannot be nil'
-      end
-
-      @conditions = conditions
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] priority Value to be assigned
-    def priority=(priority)
-      if priority.nil?
-        fail ArgumentError, 'priority cannot be nil'
-      end
-
-      @priority = priority
     end
 
     # Custom attribute writer method with validation

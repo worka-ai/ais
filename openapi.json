@@ -1,1 +1,832 @@
-{"openapi":"3.0.0","info":{"title":"","version":""},"paths":{"/tenants":{"post":{"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateTenantRequest"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateTenantResponse"}}}}}}},"/tenants/{tenant_id}/agents":{"put":{"parameters":[{"in":"path","name":"tenant_id","required":true,"schema":{"type":"integer","format":"int64"},"style":"simple"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpsertAgentRequest"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateAgentResponse"}}}}}}},"/tenants/{tenant_id}/conversations":{"post":{"parameters":[{"in":"path","name":"tenant_id","required":true,"schema":{"type":"integer","format":"int64"},"style":"simple"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateConversationUnderTenantRequest"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateConversationResponse"}}}}}}},"/tenants/{tenant_id}/llm-configs":{"post":{"parameters":[{"in":"path","name":"tenant_id","required":true,"schema":{"type":"integer","format":"int64"},"style":"simple"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpsertLLMConfigRequest"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateLLMConfigResponse"}}}}}}},"/tenants/{tenant_id}/tools":{"put":{"parameters":[{"in":"path","name":"tenant_id","required":true,"schema":{"type":"integer","format":"int64"},"style":"simple"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpsertToolRequest"}}},"required":true},"responses":{}}},"/tenants/{tenant_id}/workflows":{"post":{"parameters":[{"in":"path","name":"tenant_id","required":true,"schema":{"type":"integer","format":"int64"},"style":"simple"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateWorkflowUnderTenantRequest"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateWorkflowResponse"}}}}}}},"/workflows/{id}":{"get":{"parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"integer","format":"int64"},"style":"simple"}],"responses":{"200":{"description":"OK","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GetWorkflowResponse"}}}}}}}},"components":{"schemas":{"CreateAgentResponse":{"type":"object","properties":{"id":{"type":"integer","format":"int64"}},"required":["id"]},"CreateConversationResponse":{"type":"object","properties":{"conversation_id":{"type":"integer","format":"int64"}},"required":["conversation_id"]},"CreateConversationUnderTenantRequest":{"description":"CreateConversation (under a tenant)","type":"object","properties":{"tags":{"type":"array","items":{"type":"string"}},"title":{"type":"string"}}},"CreateTenantRequest":{"description":"CreateTenant","type":"object","properties":{"determine_conversation_with_agent":{"type":"integer","format":"int64"},"determine_conversation_with_narrative":{"type":"string"},"tenant_id":{"type":"integer","format":"int64"},"username":{"type":"string"}},"required":["determine_conversation_with_agent","determine_conversation_with_narrative","tenant_id","username"]},"CreateTenantResponse":{"type":"object","properties":{"tenant_id":{"type":"integer","format":"int64"}},"required":["tenant_id"]},"CreateWorkflowResponse":{"type":"object","properties":{"workflow_id":{"type":"integer","format":"int64"}},"required":["workflow_id"]},"CreateWorkflowUnderTenantRequest":{"description":"CreateWorkflow (under a tenant)","type":"object","properties":{"agent_id":{"type":"integer","format":"int64"},"cached_content":{"type":"object"},"conversation_id":{"type":"integer","format":"int64"},"cron":{"type":"string"},"freeform":{"type":"boolean"},"generation_config":{"type":"object","properties":{"candidate_count":{"type":"integer","format":"int32"},"max_output_tokens":{"type":"integer","format":"int32"},"stop_sequences":{"type":"array","items":{"type":"string"}},"temperature":{"type":"number","format":"double"},"top_k":{"type":"integer","format":"int32"},"top_p":{"type":"number","format":"double"}}},"input":{"type":"string"},"input_event_weight":{"type":"number","format":"double"},"output_event_weight":{"type":"number","format":"double"}},"required":["freeform","input"]},"GetWorkflowResponse":{"description":"GetWorkflow","type":"object","properties":{"events":{"type":"array","items":{"type":"string"}}},"required":["events"]},"UpdateLLMConfigResponse":{"type":"object","properties":{"message":{"type":"string"}},"required":["message"]},"UpsertAgentRequest":{"description":"UpsertAgent (under a tenant)","type":"object","properties":{"agents":{"type":"array","items":{"type":"object","properties":{"created_at":{"type":"string","format":"date-time"},"description":{"type":"string"},"edges":{"type":"array","items":{"type":"object","properties":{"conditions":{"description":"0 or more conditions under which the source agent can invoke the associated [target] [Agent]\nIf empty, the target can be invoked under any circumstances","type":"array","items":{"type":"integer","format":"int64"}},"priority":{"description":"If two edges could be invoked and both are not required then the highest priority one should be executed","type":"integer","format":"int32"},"script_condition":{"description":"A JavaScript condition which must evaluate to true for the agent to be executed","type":"string"},"target_agent_id":{"description":"The agent ID that should be called if [script_condition] or any of the [conditions] are true","type":"integer","format":"int64"}},"required":["conditions","priority","target_agent_id"]}},"examples":{"type":"array","items":{"type":"string"}},"expected_input":{"description":"The info the agent expects in its prompt","type":"string"},"id":{"type":"integer","format":"int64"},"is_default":{"type":"string","format":"date-time"},"name":{"type":"string"},"rules":{"type":"array","items":{"type":"object","properties":{"content":{"type":"string"},"description":{"type":"string"},"id":{"type":"integer","format":"int64"},"name":{"type":"string"},"position":{"type":"integer","format":"int64"},"rule_created_at":{"type":"string","format":"date-time"},"tags":{"type":"array","items":{"type":"string"}},"tenant_id":{"type":"integer","format":"int64"},"tools":{"type":"array","items":{"type":"object","properties":{"description":{"type":"string"},"function_declarations":{"type":"array","items":{"type":"object","properties":{"description":{"type":"string"},"id":{"type":"integer","format":"int64"},"internal":{"type":"object","properties":{"provider":{"type":"string"},"tags":{"type":"array","items":{"type":"string"}}},"required":["provider"]},"name":{"description":"Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores, dots and dashes, with a maximum length of 64.","type":"string"},"parameters":{"type":"object"},"response":{"type":"object"}},"required":["description","name","parameters"]}},"id":{"type":"integer","format":"int64"},"name":{"type":"string"}},"required":["function_declarations"]}},"version_created_at":{"type":"string","format":"date-time"},"version_id":{"type":"integer","format":"int64"}},"required":["content","description","id","name","position","rule_created_at","tenant_id","version_created_at","version_id"]}},"tags":{"type":"array","items":{"type":"string"}},"tenant_id":{"type":"integer","format":"int64"},"tools":{"type":"array","items":{"type":"object","properties":{"description":{"type":"string"},"function_declarations":{"type":"array","items":{"type":"object","properties":{"description":{"type":"string"},"id":{"type":"integer","format":"int64"},"internal":{"type":"object","properties":{"provider":{"type":"string"},"tags":{"type":"array","items":{"type":"string"}}},"required":["provider"]},"name":{"description":"Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores, dots and dashes, with a maximum length of 64.","type":"string"},"parameters":{"type":"object"},"response":{"type":"object"}},"required":["description","name","parameters"]}},"id":{"type":"integer","format":"int64"},"name":{"type":"string"}},"required":["function_declarations"]}}},"required":["created_at","description","edges","expected_input","id","name","rules","tenant_id","tools"]}}},"required":["agents"]},"UpsertLLMConfigRequest":{"description":"UpsertLLMConfig (under a tenant)","type":"object","properties":{"api_key":{"type":"string"},"conversation_id":{"type":"integer","format":"int64"},"id":{"type":"integer","format":"int64"},"location":{"type":"string"},"model":{"type":"string"},"project_id":{"type":"string"},"provider":{"type":"string"},"temperature":{"type":"number","format":"double"},"workflow_id":{"type":"integer","format":"int64"}},"required":["api_key","model","provider","temperature"]},"UpsertToolRequest":{"description":"UpsertTool (under a tenant)","type":"object","properties":{"tools":{"type":"array","items":{"type":"object","properties":{"description":{"type":"string"},"function_declarations":{"type":"array","items":{"type":"object","properties":{"description":{"type":"string"},"id":{"type":"integer","format":"int64"},"internal":{"type":"object","properties":{"provider":{"type":"string"},"tags":{"type":"array","items":{"type":"string"}}},"required":["provider"]},"name":{"description":"Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores, dots and dashes, with a maximum length of 64.","type":"string"},"parameters":{"type":"object"},"response":{"type":"object"}},"required":["description","name","parameters"]}},"id":{"type":"integer","format":"int64"},"name":{"type":"string"}},"required":["function_declarations"]}}},"required":["tools"]}}}}
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "paths": {
+    "/tenants": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTenantRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTenantResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenants/{tenant_id}/agents": {
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertAgentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAgentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenants/{tenant_id}/conversations": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateConversationUnderTenantRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConversationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenants/{tenant_id}/llm-configs": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertLLMConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateLLMConfigResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenants/{tenant_id}/tools": {
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertToolRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+
+        }
+      }
+    },
+    "/tenants/{tenant_id}/workflows": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkflowUnderTenantRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWorkflowResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflows/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWorkflowResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateAgentResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "CreateConversationResponse": {
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "conversation_id"
+        ]
+      },
+      "CreateConversationUnderTenantRequest": {
+        "description": "CreateConversation (under a tenant)",
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateTenantRequest": {
+        "description": "CreateTenant",
+        "type": "object",
+        "properties": {
+          "determine_conversation_with_agent": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "determine_conversation_with_narrative": {
+            "type": "string"
+          },
+          "tenant_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "determine_conversation_with_agent",
+          "determine_conversation_with_narrative",
+          "tenant_id",
+          "username"
+        ]
+      },
+      "CreateTenantResponse": {
+        "type": "object",
+        "properties": {
+          "tenant_id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "tenant_id"
+        ]
+      },
+      "CreateWorkflowResponse": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "workflow_id"
+        ]
+      },
+      "CreateWorkflowUnderTenantRequest": {
+        "description": "CreateWorkflow (under a tenant)",
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cached_content": {
+            "type": "object"
+          },
+          "conversation_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cron": {
+            "type": "string"
+          },
+          "freeform": {
+            "type": "boolean"
+          },
+          "generation_config": {
+            "type": "object",
+            "properties": {
+              "candidate_count": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "max_output_tokens": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "stop_sequences": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "temperature": {
+                "type": "number",
+                "format": "double"
+              },
+              "top_k": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "top_p": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          "input": {
+            "type": "string"
+          },
+          "input_event_weight": {
+            "type": "number",
+            "format": "double"
+          },
+          "output_event_weight": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "freeform",
+          "input"
+        ]
+      },
+      "GetWorkflowResponse": {
+        "description": "GetWorkflow",
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "events"
+        ]
+      },
+      "UpdateLLMConfigResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "UpsertAgentRequest": {
+        "description": "UpsertAgent (under a tenant)",
+        "type": "object",
+        "properties": {
+          "agents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "edges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "conditions": {
+                        "description": "These are rule IDs that act as conditions to prevent an agent being called unless all the conditions in this list are true.\n\n0 or more conditions under which the source agent can invoke the associated [target] [Agent]\nIf empty, the target can be invoked under any circumstances",
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      },
+                      "priority": {
+                        "description": "If two edges could be invoked and both are not required then the highest priority one should be executed",
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "script_condition": {
+                        "description": "A JavaScript condition which must evaluate to true for the agent to be executed",
+                        "type": "string"
+                      },
+                      "target_agent_id": {
+                        "description": "The agent ID that should be called if [script_condition] or any of the [conditions] are true",
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    },
+                    "required": [
+                      "target_agent_id"
+                    ]
+                  }
+                },
+                "examples": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "expected_input": {
+                  "description": "The info the agent expects in its prompt",
+                  "type": "string"
+                },
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "is_default": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "rules": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "rule_created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "tenant_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "tools": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "description": {
+                              "type": "string"
+                            },
+                            "function_declarations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "internal": {
+                                    "type": "object",
+                                    "properties": {
+                                      "provider": {
+                                        "type": "string"
+                                      },
+                                      "tags": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "provider"
+                                    ]
+                                  },
+                                  "name": {
+                                    "description": "Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores, dots and dashes, with a maximum length of 64.",
+                                    "type": "string"
+                                  },
+                                  "parameters": {
+                                    "type": "object"
+                                  },
+                                  "response": {
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "description",
+                                  "name",
+                                  "parameters"
+                                ]
+                              }
+                            },
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "function_declarations"
+                          ]
+                        }
+                      },
+                      "version_created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "version_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    }
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tenant_id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "tools": {
+                  "description": "Tools that the agent itself has access to as opposed to those inherited from the rules",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "function_declarations": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "description": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            },
+                            "internal": {
+                              "type": "object",
+                              "properties": {
+                                "provider": {
+                                  "type": "string"
+                                },
+                                "tags": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "provider"
+                              ]
+                            },
+                            "name": {
+                              "description": "Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores, dots and dashes, with a maximum length of 64.",
+                              "type": "string"
+                            },
+                            "parameters": {
+                              "type": "object"
+                            },
+                            "response": {
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "description",
+                            "name",
+                            "parameters"
+                          ]
+                        }
+                      },
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "function_declarations"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "description",
+                "expected_input",
+                "id",
+                "name",
+                "rules",
+                "tenant_id"
+              ]
+            }
+          }
+        },
+        "required": [
+          "agents"
+        ]
+      },
+      "UpsertLLMConfigRequest": {
+        "description": "UpsertLLMConfig (under a tenant)",
+        "type": "object",
+        "properties": {
+          "api_key": {
+            "type": "string"
+          },
+          "conversation_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "location": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "project_id": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "temperature": {
+            "type": "number",
+            "format": "double"
+          },
+          "workflow_id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "api_key",
+          "model",
+          "provider",
+          "temperature"
+        ]
+      },
+      "UpsertToolRequest": {
+        "description": "UpsertTool (under a tenant)",
+        "type": "object",
+        "properties": {
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "function_declarations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "internal": {
+                        "type": "object",
+                        "properties": {
+                          "provider": {
+                            "type": "string"
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "required": [
+                          "provider"
+                        ]
+                      },
+                      "name": {
+                        "description": "Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores, dots and dashes, with a maximum length of 64.",
+                        "type": "string"
+                      },
+                      "parameters": {
+                        "type": "object"
+                      },
+                      "response": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "name",
+                      "parameters"
+                    ]
+                  }
+                },
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "function_declarations"
+              ]
+            }
+          }
+        },
+        "required": [
+          "tools"
+        ]
+      }
+    }
+  }
+}
