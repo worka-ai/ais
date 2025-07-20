@@ -1,5 +1,5 @@
 {
-    "name": "worka",
+    "name": "@worka-ai/worka",
     "version": "0.0.2",
     "description": "NodeJS client for worka",
     "repository": {
