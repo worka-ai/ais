@@ -1,135 +1,113 @@
+## Why Worka?
+
+Worka empowers development teams to orchestrate complex, multi-agent workflows with confidence. Our platform provides:
+Build reliable, secure, and scalable multi-agent workflows with ease:
+
+- **Deterministic DAG execution**: guarantee idempotent, repeatable pipelines across retries and distributed workers.
+- **Fine-grained context control**: prune, prioritize, and shape LLM history for consistent, predictable outputs.
+- **Automated retry & audit**: built-in error handling, low-confidence replans, and human-in-the-loop escalation.
+- **Comprehensive event logging**: view and troubleshoot every step in the workflow’s lifecycle.
+- **Secure secret management & PII redaction**: vault-backed runtime injection keeps your keys, tokens, and user data
+  safe.
+- **Multi-agent routing & conditional logic**: connect specialized agents with simple JS rules for dynamic
+  decision-making.
+- **Flexible deployment**: run on-premise or in the cloud via standalone API server & workers, or compile to WebAssembly
+  for edge execution.
+- **TypeScript-first SDK**: fully typed client with auto-generated models, code-completion, and compile-time safety.
+- **Multi-tenant**: You control tenancy via API, mapping our internal tenants to yours.
+- **Secure secret management** with vault-backed runtime injection and PII redaction for compliance-ready operations.
+- **Flexible deployment**, from a standalone API server and workers to WASM-first architectures that run at the edge.
+- **Multi-agent routing** and conditional logic powered by simple JS snippets, connecting specialized agents seamlessly.
+- **Built-in retry and audit**, automatically handling low-confidence plans, retries, and human-in-the-loop escalation
+  when needed.
+
+Below is an overview of key features and their current maturity stages:
+
+| Feature                              | 🗓️ Planned | 🔧 In Development | 🅰️ Alpha | 🅱️ Beta | 🚀 Production | ⚠️ Deprecated |
+|--------------------------------------|:-----------:|:-----------------:|:---------:|:--------:|:-------------:|:-------------:|
+| Event Logging & Inspection           |             |                   |           |          |      🚀       |               |
+| Retry & Audit                        |             |                   |           |          |      🚀       |               |
+| Deterministic DAGs                   |             |                   |           |          |      🚀       |               |
+| Semantic Keys & Nonces               |             |                   |           |          |      🚀       |               |
+| Multi-Agent Routing                  |             |                   |           |          |      🚀       |               |
+| API Server & Worker Binaries         |             |                   |           |          |      🚀       |               |
+| Multi-Tenancy                        |             |                   |           |          |      🚀       |               |~~
+| Custom Tool Integrations             |             |                   |           |          |      🚀       |               |
+| Core Orchestration Features          |             |                   |           |          |      🚀       |               |
+| Google Gemini LLM Provider           |             |                   |           |   🅱️    |               |               |
+| Google Vertex LLM Provider           |             |                   |           |   🅱️    |               |               |
+| Human-in-the-Loop Escalation         |             |                   |           |   🅱️    |               |               |
+| Fine-grained Context Control         |             |                   |           |   🅱️    |               |               |
+| TypeScript/Node.js SDK               |             |                   |           |          |      🚀       |               |
+| Java SDK                             |             |                   |    🅰️    |          |               |               |
+| Python SDK                           |             |                   |    🅰️    |          |               |               |
+| Ruby SDK                             |             |                   |    🅰️    |          |               |               |
+| Rust SDK                             |             |                   |    🅰️    |          |               |               |
+| ChatGPT LLM Provider                 |             |                   |    🅰️    |          |               |               |
+| WASM-First Architecture              |             |        🅰️        |           |          |               |               |
+| PII Redaction                        |             |        🔧         |           |          |               |               |
+| Vault Secret Management              |             |        🔧         |           |          |               |               |
+| Secret Vault Management              |             |        🔧         |           |          |               |               |
+| Model Context Protocol (MCP) Support |     🗓️     |                   |           |          |               |               |
+| Anthropic Claude LLM Provider        |     🗓      |                   |           |    ️     |               |               |
+| OLlama LLM Provider                  |     🗓      |                   |           |          |               |               |
+
 # Worka Node.js Client
 
-This is the official Node.js and TypeScript client library for interacting with the Worka multi-agent orchestration platform API.
+Production-ready orchestration for AI workloads: deterministic DAGs, context control, retries, and audit, all in one
+TypeScript SDK.
 
-## Features
+## Getting Started
 
-- Auto-generated API client from the OpenAPI specification
-- Fully typed for TypeScript
-- Supports all Worka endpoints: tenants, LLM configurations, tools, agents, conversations, workflows, and events
+Install via npm or Yarn:
 
-## Prerequisites
-
-- Node.js v14 or higher
-- npm or Yarn
-- TypeScript (if using in a TypeScript project)
-
-## Installation
-
-The client is published on NPM so the usual:
-
-```shell
-# npm
+```bash
 npm install @worka-ai/worka
-
-# Yarn
+# or
 yarn add @worka-ai/worka
-
 ```
-
-If you want to use the latest from git then, install the client dependencies and build the library:
-
-```bash
-cd clients/node
-npm install
-npm run build
-```
-
-Then add the client as a dependency in your project (using a local file reference):
-
-```bash
-npm install ../clients/node
-#or with yarn
-yarn add file:../clients/node
-
-```
-
-## Usage
-
-Import the client in your Node.js or TypeScript code:
 
 ```ts
-import {
-  DefaultApi,
-  CreateTenantRequest,
-  UpsertLLMConfigRequest,
-  UpsertToolRequest,
-  UpsertAgentRequest,
-  CreateConversationUnderTenantRequest,
-  CreateWorkflowUnderTenantRequest,
-  GetWorkflowResponse,
-} from 'worka-node-client'; // adjust the import path as needed
-```
+import {DefaultApi, CreateTenantRequest} from '@worka-ai/worka';
 
-Initialize the API:
+const api = new DefaultApi({basePath: 'http://localhost:8080'});
 
-```ts
-//Use https://api.worka.ai if using a Cloud Worka. 
-const api = new DefaultApi({ basePath: 'http://localhost:8080' });
-```
-
-A full usage example is available in `examples/node/hello-world.ts`.
-
-## Example
-
-```ts
 async function main() {
-  // 1. Create a tenant
-  const tenantReq: CreateTenantRequest = {
-    username: 'support_bot',
-    determineConversationWithNarrative: 'narrative',
-    determineConversationWithAgent: 0,
-  };
-  const { body: tenantResp } = await api.tenantsPost(tenantReq);
+    // 1. Create a new tenant
+    const {body: tenant} = await api.tenantsPost({
+        username: 'dev_user',
+        determineConversationWithNarrative: 'narrative',
+        determineConversationWithAgent: 0
+    });
+    console.log(`👉 Tenant: ${tenant.tenantId}`);
 
-  // 2. Add an LLM configuration
-  const llmReq: UpsertLLMConfigRequest = {
-    id: 1,
-    provider: 'chatgpt',
-    apiKey: 'YOUR_API_KEY',
-    model: 'gpt-4',
-    temperature: 0.7,
-  };
-  await api.tenantsTenantIdLlmConfigsPost(tenantResp.tenantId, llmReq);
+    // 2. Start a conversation
+    const {body: conv} = await api.tenantsTenantIdConversationsPost(tenant.tenantId, {});
+    console.log(`👉 Conversation: ${conv.conversationId}`);
 
-  // 3. Register tools and agents (see example for details)
-
-  // 4. Start a conversation and create a workflow
-  const convReq: CreateConversationUnderTenantRequest = {};
-  const { body: convResp } = await api.tenantsTenantIdConversationsPost(
-    tenantResp.tenantId,
-    convReq
-  );
-
-  const wfReq: CreateWorkflowUnderTenantRequest = {
-    conversationId: convResp.conversationId,
-    input: 'Support email: Customer reports error 500 when uploading a file.',
-    freeform: false,
-  };
-  const { body: wfResp } = await api.tenantsTenantIdWorkflowsPost(
-    tenantResp.tenantId,
-    wfReq
-  );
-
-  // 5. Retrieve workflow events
-  const { body: events }: { body: GetWorkflowResponse } =
-    await api.workflowsIdGet(wfResp.workflowId);
-  console.log('Workflow events:', events.events);
+    // 3. Run a workflow
+    const {body: wf} = await api.tenantsTenantIdWorkflowsPost(tenant.tenantId, {
+        conversationId: conv.conversationId,
+        input: 'Hello, Worka!',
+        freeform: false
+    });
+    console.log(`👉 Workflow: ${wf.workflowId}`);
 }
 
 main().catch(console.error);
 ```
 
-## API Reference
+## Server & Workers
 
-| Method                                                     | Description                                |
-|------------------------------------------------------------|--------------------------------------------|
-| `tenantsPost(request: CreateTenantRequest)`                | Create a new tenant                        |
-| `tenantsTenantIdLlmConfigsPost(tenantId, request)`        | Add or update an LLM configuration         |
-| `tenantsTenantIdToolsPut(tenantId, request)`              | Register tools                             |
-| `tenantsTenantIdAgentsPut(tenantId, request)`             | Create or update agents                    |
-| `tenantsTenantIdConversationsPost(tenantId, request)`     | Start a new conversation                   |
-| `tenantsTenantIdWorkflowsPost(tenantId, request)`         | Create a new workflow                      |
-| `workflowsIdGet(workflowId)`                              | Retrieve workflow events and status        |
+Worka is powered by two standalone binaries:
 
-Refer to the models under `clients/node/api` for all request and response types.
+- **API Server** (`worka-server`): serves tenant configs, conversations, workflows, and events.
+- **Worker** (`worka-worker`): polls the API for tasks (LLM calls, tool execution, routing) and executes them.
+
+Download pre-built releases for your platform: https://github.com/worka-ai/ais/releases
+
+## Documentation & Community
+
+- Full docs: https://docs.worka.ai
+- Community chat: https://discord.gg/worka
+- Launching on Product Hunt soon—stay tuned!

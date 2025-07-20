@@ -1,6 +1,6 @@
 {
     "name": "@worka-ai/worka",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "NodeJS client for worka",
     "repository": {
         "type": "git",
@@ -29,7 +29,20 @@
         "ai",
         "worka",
         "llm",
-        "orchestration"
+        "orchestration",
+        "gpt3",
+        "google gemini",
+        "google vertex",
+        "gemini",
+        "vertex",
+        "chainprompt",
+        "prompt engineering",
+        "chatgpt",
+        "machine learning",
+        "ml",
+        "openai",
+        "embeddings",
+        "vectorstores"
     ],
     "bugs": {
         "url": "https://github.com/worka-ai/ais/issues"

@@ -9,17 +9,61 @@ It acts like an AI-native nginx—serving composable DAGs, toolchains, and LLM-p
   <em>Your multi-agent, DAG-based workflow engine powered by LLMs.</em>
 </p>
 
-## 🚀 Why Worka?
+## Why Worka?
 
-Worka transforms free-form messages into fully-automated business workflows by combining:
-- **Multi-Agent Architecture**: Specialized agents handle focused tasks, reducing LLM hallucinations and maintenance overhead.
-- **DAG Orchestration**: Every action is a node in a directed acyclic graph, ensuring clear dependencies, parallelism, and correct ordering.
-- **Idempotent Execution**: Deterministic nonces and semantic keys guarantee each side-effecting step runs exactly once—even on retries or restarts.
-- **Context-Aware Prompts**: Fine-grained context control lets you prune, prioritize, and budget tokens to maximize LLM relevance and minimize cost.
-- **Secure Vault & PII Redaction**: Integrate with Microsoft Presidio, store secrets in a tenant- or conversation-scoped vault, and keep sensitive data out of prompts.
-- **Self-Adaptive & Human-in-the-Loop**: Automatic retries on low-confidence DAGs, multi-provider switching, and built-in escalation for human review when needed.
-- **Audit & Observability**: Rich event logs with weights, tags, and retention settings—plus log-prob calibration—for full traceability and dynamic history assembly.
-- **WASM-First Deployment**: Run the entire engine, database, and JS sandbox in a single Wasm module, client-side or server-side.
+Worka transforms free-form messages into fully-automated business workflows.
+It empowers development teams to orchestrate complex, multi-agent workflows with confidence. 
+Build reliable, secure, and scalable multi-agent workflows with ease.
+Our platform provides:
+
+- **Deterministic DAG execution**: guarantee idempotent, repeatable pipelines across retries and distributed workers.
+- **Fine-grained context control**: prune, prioritize, and shape LLM history for consistent, predictable outputs.
+- **Automated retry & audit**: built-in error handling, low-confidence replans, and human-in-the-loop escalation.
+- **Comprehensive event logging**: view and troubleshoot every step in the workflow’s lifecycle.
+- **Secure secret management & PII redaction**: vault-backed runtime injection keeps your keys, tokens, and user data
+  safe.
+- **Multi-agent routing & conditional logic**: connect specialized agents with simple JS rules for dynamic
+  decision-making.
+- **Flexible deployment**: run on-premise or in the cloud via standalone API server & workers, or compile to WebAssembly
+  for edge execution.
+- **TypeScript-first SDK**: fully typed client with auto-generated models, code-completion, and compile-time safety.
+- **Multi-tenant**: You control tenancy via API, mapping our internal tenants to yours.
+- **Secure secret management** with vault-backed runtime injection and PII redaction for compliance-ready operations.
+- **Flexible deployment**, from a standalone API server and workers to WASM-first architectures that run at the edge.
+- **Multi-agent routing** and conditional logic powered by simple JS snippets, connecting specialized agents seamlessly.
+- **Built-in retry and audit**, automatically handling low-confidence plans, retries, and human-in-the-loop escalation
+  when needed.
+
+Below is an overview of key features and their current maturity stages:
+
+| Feature                              | 🗓️ Planned | 🔧 In Development | 🅰️ Alpha | 🅱️ Beta | 🚀 Production | ⚠️ Deprecated |
+|--------------------------------------|:-----------:|:-----------------:|:---------:|:--------:|:-------------:|:-------------:|
+| Event Logging & Inspection           |             |                   |           |          |      🚀       |               |
+| Retry & Audit                        |             |                   |           |          |      🚀       |               |
+| Deterministic DAGs                   |             |                   |           |          |      🚀       |               |
+| Semantic Keys & Nonces               |             |                   |           |          |      🚀       |               |
+| Multi-Agent Routing                  |             |                   |           |          |      🚀       |               |
+| API Server & Worker Binaries         |             |                   |           |          |      🚀       |               |
+| Multi-Tenancy                        |             |                   |           |          |      🚀       |               |~~
+| Custom Tool Integrations             |             |                   |           |          |      🚀       |               |
+| Core Orchestration Features          |             |                   |           |          |      🚀       |               |
+| Google Gemini LLM Provider           |             |                   |           |   🅱️    |               |               |
+| Google Vertex LLM Provider           |             |                   |           |   🅱️    |               |               |
+| Human-in-the-Loop Escalation         |             |                   |           |   🅱️    |               |               |
+| Fine-grained Context Control         |             |                   |           |   🅱️    |               |               |
+| TypeScript/Node.js SDK               |             |                   |           |          |      🚀       |               |
+| Java SDK                             |             |                   |    🅰️    |          |               |               |
+| Python SDK                           |             |                   |    🅰️    |          |               |               |
+| Ruby SDK                             |             |                   |    🅰️    |          |               |               |
+| Rust SDK                             |             |                   |    🅰️    |          |               |               |
+| ChatGPT LLM Provider                 |             |                   |    🅰️    |          |               |               |
+| WASM-First Architecture              |             |        🅰️        |           |          |               |               |
+| PII Redaction                        |             |        🔧         |           |          |               |               |
+| Vault Secret Management              |             |        🔧         |           |          |               |               |
+| Secret Vault Management              |             |        🔧         |           |          |               |               |
+| Model Context Protocol (MCP) Support |     🗓️     |                   |           |          |               |               |
+| Anthropic Claude LLM Provider        |     🗓      |                   |           |    ️     |               |               |
+| OLlama LLM Provider                  |     🗓      |                   |           |          |               |               |
 
 ## ✨ Core Features
 
